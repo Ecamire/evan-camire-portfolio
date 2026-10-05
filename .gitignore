@@ -7,5 +7,6 @@ out/
 .vercel
 
 .DS_Store
-outputs/
-work/
+/outputs/
+/work/
+CLAUDE.md
