@@ -1,0 +1,346 @@
+export const profile = {
+  name: "Evan Camire",
+  location: "Charleston, South Carolina",
+  linkedin: "https://www.linkedin.com/in/evan-camire/",
+  github: "https://github.com/Ecamire",
+  instagram: "https://www.instagram.com/evan.camire/",
+  email: "evancamireventures@gmail.com",
+  source: "https://github.com/Ecamire/evan-camire-portfolio",
+  headline: "I build AI products around real work.",
+  introduction:
+    "From the first client conversation to the shipped product, I turn messy business problems into software people can actually use.",
+  philosophy:
+    "The model is one part of the product. The real value is in the workflow around it.",
+};
+
+export type CaseStudy = {
+  slug: string;
+  kind: "marketing" | "pricing";
+  name: string;
+  title: string;
+  description: string;
+  industry: string;
+  metric: string;
+  metricContext: string;
+  result: string;
+  summary: string;
+  problem: string[];
+  before: string;
+  after: string;
+  decisions: { title: string; text: string }[];
+  architecture: { name: string; description: string }[];
+  validation: { title: string; text: string }[];
+  lesson: string;
+  technologies: string[];
+  implementation: string[];
+};
+
+export const ownership = [
+  "Client discovery",
+  "Scoping & architecture",
+  "Implementation",
+  "Testing & evaluations",
+  "Delivery",
+];
+
+export const cases: CaseStudy[] = [
+  {
+    slug: "marketing-workflow",
+    kind: "marketing",
+    name: "AI marketing and sales workflow",
+    title: "An agent for newsletters, itineraries, and travel marketing.",
+    description:
+      "I built a travel operator’s marketing backend: business context, structured drafts, asset rendering, revisions, persistent work, and approval before delivery.",
+    industry: "Travel & group experiences",
+    metric: "30 min",
+    metricContext: "saved per marketing asset",
+    result:
+      "Client-reported: approximately 30 minutes saved per marketing asset.",
+    summary:
+      "A travel-business owner needed a faster way to produce newsletters, itineraries, and marketing handouts. I designed and built a system that brings business context, drafting, revisions, consistent layouts, and human approvals into one workflow.",
+    problem: [
+      "The operator was spending time turning trip details into polished marketing materials. A useful asset needed the right audience, business voice, trip facts, imagery, and layout. A generated paragraph alone would still leave much of that work to the owner.",
+      "Discovery shaped the approval model: the owner wanted to review what went out. The product needed to make creation easier while keeping that control explicit, including when work was revised or interrupted.",
+    ],
+    before:
+      "Gather trip details, write the copy, assemble a layout, revise, and coordinate delivery by hand.",
+    after:
+      "Give the agent a short brief, review a structured draft, request changes, and approve the finished asset.",
+    decisions: [
+      {
+        title: "Invest in the workflow",
+        text: "I chose to spend more time on a custom backend: business context, stored artifacts, revisions, and delivery controls. That makes the product useful beyond any single model response. The tradeoff was more implementation work in exchange for a workflow the business could keep using.",
+      },
+      {
+        title: "Let code own the layout",
+        text: "The model produces structured content; application code renders the asset. This gives the owner consistent newsletter, itinerary, and handout layouts while still allowing the content to change.",
+      },
+      {
+        title: "Make approval an actual control",
+        text: "Approval and delivery are separate states. The application enforces the owner's approval rules before sending, rather than relying on a sentence in a prompt to keep an agent from acting.",
+      },
+      {
+        title: "Keep work recoverable",
+        text: "Conversation, work, and artifact records preserve what has been requested and produced. Recovery paths help interrupted work continue with its context instead of starting over.",
+      },
+    ],
+    architecture: [
+      {
+        name: "Business context",
+        description: "Audience, voice, trip facts, and approved rules",
+      },
+      {
+        name: "Agent & tools",
+        description: "Research, structured drafting, and revision requests",
+      },
+      {
+        name: "Persistent work",
+        description: "Conversation, work, and artifact records",
+      },
+      {
+        name: "Asset rendering",
+        description: "Application-controlled layouts and previews",
+      },
+      {
+        name: "Human approval",
+        description: "Review and hold before permitted delivery",
+      },
+    ],
+    validation: [
+      {
+        title: "Workflow behavior",
+        text: "Unit tests and evaluations cover drafting, approval gates, artifact state, and recovery behavior. These checks exercise the surrounding product, alongside the generated content.",
+      },
+      {
+        title: "Output quality",
+        text: "Structured content, deterministic rendering, and content checks help keep the facts and the final presentation consistent. A preview is part of the review workflow.",
+      },
+      {
+        title: "Production visibility",
+        text: "Error monitoring, model traces, and usage accounting help diagnose failed work and understand the quality and cost of model calls.",
+      },
+    ],
+    lesson:
+      "A strong AI product reduces the work before and after generation. The owner should be able to stay focused on the trip and the audience while the software carries the context, formatting, and workflow.",
+    technologies: [
+      "TypeScript",
+      "LLM tool use",
+      "Structured outputs",
+      "Persistent state",
+      "Email integrations",
+      "Evaluations",
+      "Sentry",
+      "Langfuse",
+    ],
+    implementation: [
+      "Structured content → rendered assets",
+      "Conversation, work, and artifact records",
+      "Signed approval links and delivery controls",
+    ],
+  },
+  {
+    slug: "pricing-workflow",
+    kind: "pricing",
+    name: "AI pricing and revenue management",
+    title: "A pricing engine connected to Hospitable and PriceLabs.",
+    description:
+      "I built the data integrations, pricing engine, daily review, and approved PriceLabs write path that replaced an operator’s manual morning pricing routine.",
+    industry: "Vacation-rental operations",
+    metric: "2 hours",
+    metricContext: "saved each morning",
+    result: "Client-reported: 2 hours saved each morning.",
+    summary:
+      "A vacation-rental operator was manually reviewing and overriding prices in PriceLabs each morning. I built a product that brings together calendar data, booking pace, pricing recommendations, and demand signals, then turns them into explained proposals the operator can review and approve.",
+    problem: [
+      "The morning pricing routine required the operator to move between data sources, interpret what was happening, and manually override prices. The value of automation depended on respecting the operator's rules and keeping the reasons for a change visible.",
+      "A model response suggesting a price would not finish that workflow. The product needed reliable data access, deterministic limits, an approval surface, a controlled write path, and a record of what changed.",
+    ],
+    before:
+      "Review bookings and recommendations, interpret local demand, then manually override prices in PriceLabs.",
+    after:
+      "Review a daily brief with explained proposals and approve changes through the connected workflow.",
+    decisions: [
+      {
+        title: "Build around the operator's business",
+        text: "I invested in the integrations, pricing rules, stored history, and approval workflow. The extra backend work made the output actionable in the systems the operator already used.",
+      },
+      {
+        title: "Keep pricing bounds deterministic",
+        text: "The pricing engine calculates proposals within configured floors, ceilings, and move limits. LLM reasoning enriches the workflow without taking ownership of those hard constraints.",
+      },
+      {
+        title: "Use one controlled write path",
+        text: "The system reads booking and calendar data from Hospitable and sends approved date-specific overrides to PriceLabs. PriceLabs remains responsible for syncing the final prices back to the property-management system.",
+      },
+      {
+        title: "Plan for model failures",
+        text: "The model client uses bounded retries and a circuit breaker. Callers can fall back to deterministic logic when model calls fail, so the pricing cycle can continue with reduced judgment capability rather than losing the entire run.",
+      },
+    ],
+    architecture: [
+      {
+        name: "Data & signals",
+        description: "Calendar, booking pace, PriceLabs, and demand",
+      },
+      {
+        name: "Pricing engine",
+        description: "Rules, bounds, and explained proposals",
+      },
+      {
+        name: "Operator review",
+        description: "Daily brief with approve or reject actions",
+      },
+      {
+        name: "Controlled write",
+        description: "Approved overrides sent to PriceLabs",
+      },
+      {
+        name: "Change history",
+        description: "A record of the action and its rationale",
+      },
+    ],
+    validation: [
+      {
+        title: "Data and constraints",
+        text: "Tests cover adapter normalization, booking pace, pricing limits, and action behavior. Invalid or missing upstream data needs explicit handling before it reaches a recommendation.",
+      },
+      {
+        title: "Failure behavior",
+        text: "Model-client tests exercise transient failures and fallback behavior. Mock and dry-run paths support verification before live writes are enabled.",
+      },
+      {
+        title: "Model economics",
+        text: "Task-based model routing, prompt caching, and usage tracking make quality and cost tradeoffs visible. Cache usage is checked through recorded token metrics rather than assumed.",
+      },
+    ],
+    lesson:
+      "Decision support needs a clear chain from input to explanation to approved action. Trust comes from visible reasons, reliable constraints, and behavior that still makes sense when a dependency fails.",
+    technologies: [
+      "TypeScript",
+      "Hospitable API",
+      "PriceLabs API",
+      "Pricing rules",
+      "LLM orchestration",
+      "Fault tolerance",
+      "Prompt caching",
+      "Langfuse",
+    ],
+    implementation: [
+      "Hospitable booking and calendar data",
+      "Deterministic pricing bounds and move limits",
+      "Approved PriceLabs overrides and change history",
+    ],
+  },
+];
+
+export const skills = [
+  {
+    title: "TypeScript & integrations",
+    text: "Agent tools, Hospitable data reads, PriceLabs overrides, and email delivery controls.",
+  },
+  {
+    title: "Persistent state & recovery",
+    text: "Conversation, work, and artifact records that preserve context across interrupted tasks.",
+  },
+  {
+    title: "Tests & evaluations",
+    text: "Pricing bounds, adapter normalization, approval behavior, failure handling, and output checks.",
+  },
+  {
+    title: "Production observability",
+    text: "Sentry error monitoring, Langfuse model traces, token usage, and cache accounting.",
+  },
+];
+
+export type Experience = {
+  company: string;
+  role: string;
+  dates: string;
+  status: "Current" | "Past";
+  description: string;
+  focus: string[];
+  url?: string;
+};
+export const experiences: Experience[] = [
+  {
+    company: "Openhour",
+    role: "Co-founder & CTO",
+    dates: "2026–present",
+    status: "Current",
+    description:
+      "I work directly with business owners to understand their operations, scope the product, and build custom AI workflows. I own the architecture and implementation, along with testing, evaluation, and delivery.",
+    focus: [
+      "Client discovery",
+      "AI product development",
+      "Managed infrastructure",
+    ],
+    url: "https://openhour.io/",
+  },
+  {
+    company: "VitalityIP",
+    role: "Senior AI Experience Engineer",
+    dates: "March 2026–present",
+    status: "Current",
+    description:
+      "At a health technology startup, I build the brand design system, code retail grocer partnership campaigns, and manage CRM outreach across grocery and investor relationships.",
+    focus: ["Design systems", "Partnership campaigns", "CRM workflows"],
+    url: "https://vitalityip.ai/",
+  },
+  {
+    company: "Short & Sweet Properties",
+    role: "Founder & operator",
+    dates: "January 2025–June 2026",
+    status: "Past",
+    description:
+      "I built and operated a Charleston vacation-rental management business, handling owner relationships, sales, marketing, guest experience, and day-to-day operations. I sold the management business in 2026.",
+    focus: ["Owner acquisition", "Rental operations", "Business handoff"],
+  },
+  {
+    company: "Fringe Golf Co.",
+    role: "Event operations & AI workflows",
+    dates: "March–August 2026",
+    status: "Past",
+    description:
+      "I led tournament event logistics and operations, and guided the use of AI workflows in brand strategy, design, and team collaboration.",
+    focus: ["Event logistics", "Team collaboration", "Workflow design"],
+  },
+];
+export const biography = {
+  title: "The business side informs the build.",
+  paragraphs: [
+    "I’m Evan, a Charleston-based entrepreneur and Openhour co-founder. Before building software for operators, I ran a vacation-rental management business myself. Selling to owners, managing the day-to-day work, and handing off the business gave me a practical view of what useful software needs to do.",
+    "I’m studying Commercial Real Estate Finance at the College of Charleston. My work spans engineering, sales, design, and operations. I enjoy the conversations that clarify a problem as much as the building that follows.",
+    "Outside work, running, health, and fitness are part of my routine. I’m interested in products that help people make better decisions and improve the way they spend their time.",
+  ],
+  education:
+    "College of Charleston · B.S. in Commercial Real Estate Finance · In progress",
+};
+export const writing = {
+  name: "Friday AI Brief",
+  title: "What shipped. Why it matters. What to try.",
+  description:
+    "I write a weekly AI newsletter for people building and running businesses. I translate new tools and releases into plain English, with practical ways to put them to work.",
+  archive: "https://openhour.io/newsletter",
+  site: "https://friday-ai-brief.netlify.app/",
+};
+export const socialLinks = [
+  {
+    label: "Email",
+    detail: profile.email,
+    href: `mailto:${profile.email}`,
+    kind: "email",
+  },
+  {
+    label: "LinkedIn",
+    detail: "in/evan-camire",
+    href: profile.linkedin,
+    kind: "linkedin",
+  },
+  { label: "GitHub", detail: "Ecamire", href: profile.github, kind: "github" },
+  {
+    label: "Instagram",
+    detail: "@evan.camire",
+    href: profile.instagram,
+    kind: "instagram",
+  },
+] as const;
