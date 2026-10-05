@@ -860,8 +860,12 @@ figure {
 }
 /* Keep explanatory labels readable against the warmer paper surface. */
 .back-link,
-.before-after span {
+.before-after span,
+.demo-status {
   color: var(--muted);
+}
+.demo-status.status-approved {
+  color: #25654f;
 }
 .landscape > span {
   background: #24496f;
