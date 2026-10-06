@@ -141,16 +141,16 @@ export const cases: CaseStudy[] = [
   {
     slug: "pricing-workflow",
     kind: "pricing",
-    name: "Revenue Radar",
-    title: "A pricing engine connected to Hospitable and PriceLabs.",
+    name: "Revenue Radar AI Agent",
+    title: "Automated morning pricing, with an agent you can ask why.",
     description:
-      "I built the data integrations, pricing engine, daily review, and approved PriceLabs write path that replaced an operator’s manual morning pricing routine.",
+      "I built a daily 5 a.m. Eastern pricing workflow: Hospitable and PriceLabs integrations, automated updates within configured limits, approval gates, reporting, and a conversational agent.",
     industry: "Vacation-rental operations",
     metric: "2 hours",
     metricContext: "saved each morning",
     result: "Client-reported: 2 hours saved each morning.",
     summary:
-      "A vacation-rental operator was manually reviewing and overriding prices in PriceLabs each morning. I built a product that brings together calendar data, booking pace, pricing recommendations, and demand signals, then turns them into explained proposals the operator can review and approve.",
+      "A vacation-rental operator was manually reviewing and overriding prices in PriceLabs each morning. I built an agent that runs at 5 a.m. Eastern, analyzes bookings and demand, and automatically applies eligible price changes within configured limits. Changes that need sign-off go to an approval queue; the operator can review reports or ask the agent about its decisions.",
     problem: [
       "The morning pricing routine required the operator to move between data sources, interpret what was happening, and manually override prices. The value of automation depended on respecting the operator's rules and keeping the reasons for a change visible.",
       "A model response suggesting a price would not finish that workflow. The product needed reliable data access, deterministic limits, an approval surface, a controlled write path, and a record of what changed.",
@@ -158,7 +158,7 @@ export const cases: CaseStudy[] = [
     before:
       "Review bookings and recommendations, interpret local demand, then manually override prices in PriceLabs.",
     after:
-      "Review a daily brief with explained proposals and approve changes through the connected workflow.",
+      "The 5 a.m. cycle handles eligible price updates automatically. Review the daily brief, approve exceptions, and ask the agent about changes.",
     decisions: [
       {
         title: "Build around the operator's business",
@@ -170,7 +170,7 @@ export const cases: CaseStudy[] = [
       },
       {
         title: "Use one controlled write path",
-        text: "The system reads booking and calendar data from Hospitable and sends approved date-specific overrides to PriceLabs. PriceLabs remains responsible for syncing the final prices back to the property-management system.",
+        text: "The system reads bookings and calendars from Hospitable and sends eligible automatic updates and approved exceptions through one controlled PriceLabs write path. PriceLabs syncs the final prices back to the property-management system.",
       },
       {
         title: "Plan for model failures",
@@ -188,11 +188,11 @@ export const cases: CaseStudy[] = [
       },
       {
         name: "Operator review",
-        description: "Daily brief with approve or reject actions",
+        description: "Automatic eligible updates; approval for exceptions",
       },
       {
         name: "Controlled write",
-        description: "Approved overrides sent to PriceLabs",
+        description: "Automatic or approved overrides sent to PriceLabs",
       },
       {
         name: "Change history",
@@ -228,7 +228,7 @@ export const cases: CaseStudy[] = [
     implementation: [
       "Hospitable booking and calendar data",
       "Deterministic pricing bounds and move limits",
-      "Approved PriceLabs overrides and change history",
+      "Scheduled PriceLabs updates and change history",
     ],
   },
 ];
@@ -408,7 +408,7 @@ export const productTours: Record<CaseStudy["kind"], ProductTourContent> = {
     variants: [trekVariant("newsletter", "Newsletter"), trekVariant("itinerary", "Itinerary"), trekVariant("handout", "Handout")],
   },
   pricing: {
-    title: "Revenue Radar",
+    title: "Revenue Radar AI Agent",
     preview: productImage("radar-dashboard-preview", "Revenue Radar’s actual reporting dashboard · Sample data"),
     video: {src: "/videos/radar-walkthrough.mp4?v=chat", poster: "/videos/radar-poster.jpg?v=chat", captions: "/videos/radar-walkthrough.vtt?v=chat", duration: "43 sec", chapters: [
       {title:"Start with the operating picture",description:"Revenue Radar’s original demo dashboard shows sample bookings and reporting history."},
@@ -442,19 +442,17 @@ export const workGalleries: Record<CaseStudy["kind"], WorkGalleryContent> = {
     summary: "Turn a trip brief into a designed newsletter, itinerary, or handout, with revisions and human approval.",
     initialIndex: 1,
     phases: [
-      { label: "Request", description: "Give the agent the group, dates, and trip requirements in one conversation.", media: productImage("trek-newsletter-request", "Trek’s current chat console · A fictional newsletter request") },
-      { label: "Review", description: "Open the finished newsletter, compare drafts, and review the layout before approving.", media: productImage("trek-newsletter-review", "Trek’s current review panel · A designed sample newsletter and draft controls") },
-      { label: "Revise", description: "Ask for a change. The updated draft stays connected to the original request.", media: productImage("trek-newsletter-revision", "Trek’s current chat console · A fictional revision and saved draft") },
+      { label: "Chat", description: "A short request becomes a newsletter draft, with missing trip details flagged for review.", media: {src: "/images/products/trek-agent-chat.jpg", alt: "Trek Travel agent conversation creating a fall trips newsletter", width: 2492, height: 1488} },
+      { label: "Library", description: "Newsletters, flyers, and itineraries stay together in a searchable library, ready to reopen and reuse.", media: {src: "/images/products/trek-agent-library.jpg", alt: "Trek Travel library showing newsletters, flyers, itineraries, and contact lists", width: 2486, height: 1496} },
     ],
   },
   pricing: {
-    title: "Revenue Radar",
-    summary: "Connect booking pace and demand to pricing proposals. Ask the agent why, then decide what changes.",
-    initialIndex: 1,
+    title: "Revenue Radar AI Agent",
+    summary: "Runs at 5 a.m. Eastern each morning to automatically update PriceLabs prices using bookings, demand signals, and configured limits.",
+    initialIndex: 0,
     phases: [
-      { label: "Dashboard", description: "See the bookings, reporting history, and demand signals behind daily pricing decisions.", media: productImage("radar-dashboard-preview", "Revenue Radar reporting dashboard · Fictional booking and pricing figures") },
-      { label: "Chat", description: "Ask why a price was recommended. The explanation shows the limits and sources consulted.", media: productImage("pricing-chat-answer", "Revenue Radar chat · A fictional explanation of a capped recommendation") },
-      { label: "Review", description: "Review the proposed change and its reasoning before authorizing a price adjustment.", media: productImage("radar-capped-review", "Revenue Radar approval queue · A fictional proposal within configured limits") },
+      { label: "Reports", description: "Weekly and monthly reports connect pricing activity with booked nights, revenue, and average nightly rates.", media: {src: "/images/products/revenue-radar-reports.jpg", alt: "Revenue Radar weekly report showing booked nights, pricing activity, and booking history", width: 2470, height: 1482} },
+      { label: "Chat", description: "The operator can ask about pricing decisions, booking performance, and the demand behind each morning’s changes.", media: {src: "/images/products/revenue-radar-chat.jpg", alt: "Revenue Radar agent chat with a summary of recent bookings and price adjustments", width: 2468, height: 1502} },
     ],
   },
 };

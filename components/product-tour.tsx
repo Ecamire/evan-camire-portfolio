@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, ArrowUpRight, RotateCcw } from "lucide-react";
+import { ArrowLeft, ArrowRight, RotateCcw } from "lucide-react";
 import type { ProductTourContent } from "@/lib/content";
 
 export function ProductTour({ content }: { content: ProductTourContent }) {
@@ -17,7 +17,7 @@ export function ProductTour({ content }: { content: ProductTourContent }) {
   return (
     <div className="product-tour" aria-label={`${content.title} guided screenshot tour`}>
       <div className="tour-header">
-        <p className="tour-evidence-label">Actual product interface · Sample data · Guided walkthrough</p>
+        <p className="tour-evidence-label">Guided walkthrough with fictional data</p>
         <label className="tour-picker">
           <span>Choose an example</span>
           <select value={variantIndex} onChange={(e) => {setVariantIndex(Number(e.target.value)); reset();}}>
@@ -33,7 +33,7 @@ export function ProductTour({ content }: { content: ProductTourContent }) {
         <a href={step.media.src} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size image: ${step.title}`}>
           <Image src={step.media.src} alt={step.media.alt} width={step.media.width} height={step.media.height} sizes="(max-width: 767px) 100vw, 1100px" />
         </a>
-        <figcaption><span>Captured state · {variant.label}</span><a href={step.media.src} target="_blank" rel="noopener noreferrer">Open full-size image <ArrowUpRight size={15} aria-hidden="true" /></a></figcaption>
+        <figcaption>Captured state · {variant.label}</figcaption>
       </figure>
       <div className="tour-step-copy" aria-live="polite" aria-atomic="true">
         <p className="tour-count">Step {stepIndex + 1} of {variant.steps.length}</p>
@@ -50,7 +50,7 @@ export function ProductTour({ content }: { content: ProductTourContent }) {
         <button type="button" className="tour-reset" onClick={reset}><RotateCcw size={14} aria-hidden="true" />Start again</button>
         <button type="button" className="button primary" disabled={stepIndex === last} onClick={() => setStepIndex(stepIndex + 1)}>Next<ArrowRight size={16} aria-hidden="true" /></button>
       </div>
-      <p className="tour-note">These are locally captured screenshots of the original interface, using fictional sample data. Tour controls navigate images only. Open a full-size image to read interface details.</p>
+      <p className="tour-note">These locally captured screenshots use fictional data. Tour controls navigate images only.</p>
     </div>
   );
 }

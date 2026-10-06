@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useId, useRef, useState, type KeyboardEvent } from "react";
-import { ArrowUpRight } from "lucide-react";
 import type { WorkGalleryContent } from "@/lib/content";
 
 export function WorkGallery({ content }: { content: WorkGalleryContent }) {
@@ -35,10 +34,6 @@ export function WorkGallery({ content }: { content: WorkGalleryContent }) {
           <Image src={phase.media.src} alt={phase.media.alt} width={phase.media.width} height={phase.media.height} sizes="(max-width: 767px) 100vw, 50vw" />
         </a>
         <p className="work-phase-description">{phase.description}</p>
-        <div className="work-screen-meta">
-          <span>Actual interface · Sample data</span>
-          <a href={phase.media.src} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size ${content.title} screenshot: ${phase.label}`}>Full-size image <ArrowUpRight size={14} aria-hidden="true" /></a>
-        </div>
       </div>
     </div>
   );

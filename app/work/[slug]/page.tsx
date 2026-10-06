@@ -8,7 +8,7 @@ import {
   Check,
   Layers3,
 } from "lucide-react";
-import { cases, ownership, productTours } from "@/lib/content";
+import { cases, ownership, productTours, workGalleries } from "@/lib/content";
 import { ProductTour } from "@/components/product-tour";
 import { ProductScreenshot } from "@/components/product-screenshot";
 
@@ -63,10 +63,7 @@ export default async function CaseStudyPage({
             </a>
           </div>
           <div className={`case-hero-visual stage-${c.kind}`}>
-            <ProductScreenshot media={productTours[c.kind].preview} />
-            <span className="case-visual-caption">
-              Actual product interface · Sample data
-            </span>
+            <ProductScreenshot media={workGalleries[c.kind].phases[workGalleries[c.kind].initialIndex].media} />
           </div>
         </div>
         <div className="case-facts">
