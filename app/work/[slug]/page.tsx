@@ -185,7 +185,7 @@ export default async function CaseStudyPage({
           <ProductVideo content={productTours[c.kind]} />
           {c.kind === "marketing" && <div className="sample-output-links" aria-label="Full-size sample outputs">
             <p>Open the rendered sample outputs</p>
-            <div>{["newsletter", "itinerary", "handout"].map((asset) => <a key={asset} href={`/images/products/trek-${asset}-output.jpg`} target="_blank" rel="noopener noreferrer">{asset[0].toUpperCase() + asset.slice(1)} <ArrowUpRight size={15} aria-hidden="true" /></a>)}</div>
+            <div>{["newsletter", "itinerary", "handout"].map((asset) => <a key={asset} href={`/images/products/trek-${asset}-full.jpg`} target="_blank" rel="noopener noreferrer">{asset[0].toUpperCase() + asset.slice(1)} <ArrowUpRight size={15} aria-hidden="true" /></a>)}</div>
             <small>Original renderers · Fictional content · Photography: NPS / Victoria Stauffenberg</small>
           </div>}
           <span id="implementation" />

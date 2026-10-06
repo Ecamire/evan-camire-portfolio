@@ -1,16 +1,16 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:05.000
-01 / GIVE THE AGENT A BRIEF
+00:00:00.000 --> 00:00:06.000
+01 / A FINISHED NEWSLETTER
+The current design engine turns the brief into a photo-led, branded asset.
+
+00:00:06.000 --> 00:00:11.000
+02 / GIVE THE AGENT A BRIEF
 Group, dates, transport, and activities. One saved conversation.
 
-00:00:05.000 --> 00:00:10.000
-02 / OPEN THE SAVED DRAFT
+00:00:11.000 --> 00:00:16.000
+03 / OPEN THE SAVED DRAFT
 The finished asset stays linked to the request, waiting for review.
-
-00:00:10.000 --> 00:00:16.000
-03 / SEE THE FINISHED NEWSLETTER
-Photo-led output from the original newsletter renderer.
 
 00:00:16.000 --> 00:00:21.000
 04 / READ THE TRIP DETAILS
@@ -18,7 +18,7 @@ Structured content becomes a consistent layout, with dates and a next step.
 
 00:00:21.000 --> 00:00:25.000
 ALSO / A DAY-BY-DAY ITINERARY
-The original print renderer produces a clear schedule for the group leader.
+The current canvas renderer produces a clear schedule for the group leader.
 
 00:00:25.000 --> 00:00:29.000
 ALSO / A TWO-SIDED HANDOUT

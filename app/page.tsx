@@ -118,7 +118,7 @@ export default function Home() {
                 <h3><Link href={"/work/" + c.slug}>{c.name}</Link></h3>
                 <p className="work-feature-description">{c.kind === "marketing"
                   ? "A short trip brief becomes a newsletter, itinerary, or handout. Revise it in the conversation, review the finished piece, and approve it."
-                  : "Booking pace and demand signals become explained pricing proposals. The operator reviews the limits and decides what changes."}</p>
+                  : "Booking pace and demand signals become pricing proposals. Ask the agent why, check the limits, and decide what changes."}</p>
                 <p className="work-feature-result">{c.result}</p>
                 <Link className="case-link" href={"/work/" + c.slug}>Explore the full case study <ArrowRight size={16} aria-hidden="true" /></Link>
               </div>

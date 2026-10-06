@@ -27,7 +27,7 @@ export function ProductTour({ content }: { content: ProductTourContent }) {
       </div>
       <p className="tour-scenario">{variant.description}</p>
       <ol className="tour-step-list" aria-label="Tour progress">
-        {variant.steps.map((s, i) => <li key={s.id} aria-current={stepIndex === i ? "step" : undefined}><span>{i + 1}</span>{i === last && held ? "Held" : ({request:"Request",draft:"Draft",revision:"Revision",review:"Review",dashboard:"Dashboard",inputs:"Inputs",recommendation:"Recommendation",approved:"Outcome"} as Record<string,string>)[s.id]}</li>)}
+        {variant.steps.map((s, i) => <li key={s.id} aria-current={stepIndex === i ? "step" : undefined}><span>{i + 1}</span>{i === last && held ? "Held" : ({request:"Request",draft:"Draft",revision:"Revision",review:"Review",dashboard:"Dashboard",chat:"Chat",inputs:"Inputs",recommendation:"Recommendation",approved:"Outcome"} as Record<string,string>)[s.id]}</li>)}
       </ol>
       <figure className="tour-capture">
         <a href={step.media.src} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size image: ${step.title}`}>

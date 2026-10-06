@@ -361,7 +361,7 @@ export type TourStep = { id: string; title: string; description: string; media: 
 export type TourVariant = { id: string; label: string; description: string; steps: TourStep[]; held: TourStep };
 export type ProductVideoContent = { src: string; poster: string; captions: string; duration: string; chapters: {title: string; description: string}[] };
 export type ProductTourContent = { title: string; preview: ProductMedia; video: ProductVideoContent; variants: TourVariant[] };
-const productImage = (filename: string, alt: string): ProductMedia => ({src: `/images/products/${filename}.jpg`, alt, width: 1100, height: filename === "radar-dashboard" ? 1417 : filename.startsWith("radar-") && filename.endsWith("-inputs") ? 915 : filename.startsWith("radar-") && filename !== "radar-dashboard-preview" ? 866 : 800});
+const productImage = (filename: string, alt: string): ProductMedia => ({src: `/images/products/${filename}.jpg`, alt, width: filename.startsWith("trek-") ? 1280 : 1100, height: filename.startsWith("trek-") ? 720 : filename === "radar-dashboard" ? 1417 : filename.startsWith("radar-") && filename.endsWith("-inputs") ? 915 : filename.startsWith("radar-") && filename !== "radar-dashboard-preview" ? 866 : 800});
 const trekVariant = (id: string, label: string): TourVariant => {
   const media = (stage: string, alt: string) => productImage(`trek-${id}-${stage}`, `${label} · Trek Travel’s actual console with fictional sample data · ${alt}`);
   return {
@@ -383,6 +383,7 @@ const radarVariant = (id: string, label: string, explanation: string): TourVaria
     steps: [
       {id: "dashboard", title: "See the operating picture", description: "The existing demo builder supplies fictional listings, bookings, signals, and reporting history to the original dashboard. These figures demonstrate the interface; they are not client performance results.", media: productImage("radar-dashboard", "Revenue Radar reporting dashboard · Fictional sample bookings and demand signals")},
       {id: "inputs", title: "Start with the booking inputs", description: "Listing pace makes occupancy, booking pace, and proposed changes visible. Harbor Cottage is a fictional listing used throughout this scenario.", media: media("inputs", "listing pace and occupancy inputs")},
+      ...(id === "capped" ? [{id: "chat", title: "Ask why a recommendation was made", description: "In the original chat interface, the sample operator asks about the $360 cap. The fictional reply explains the ceiling and 20% move limit and identifies the sources consulted. The screenshot records a local fixture response, not a live model run.", media: productImage("pricing-chat-answer", "Revenue Radar chat · Sample price explanation with consulted sources")}]: []),
       {id: "recommendation", title: "Explain the move and its limits", description: explanation + " The proposal includes its rationale, minimum stay, status, and configured pricing limits.", media: media("recommendation", "explained recommendation within configured limits")},
       {id: "review", title: "Keep the operator in control", description: "The approval queue surfaces the nightly change and its reasoning alongside Approve and Deny. The operator can also defer a decision by leaving the proposal pending.", media: media("review", "operator approval queue")},
       {id: "approved", title: "Record the sample outcome", description: "The captured change history shows a fictional approved override and the approving operator. It illustrates the product’s audit trail. No PriceLabs write or external action occurred during capture.", media: media("approved", "fictional approved change history")},
@@ -393,13 +394,13 @@ const radarVariant = (id: string, label: string, explanation: string): TourVaria
 export const productTours: Record<CaseStudy["kind"], ProductTourContent> = {
   marketing: {
     title: "Trek Travel AI agent system",
-    preview: {src: "/images/products/trek-output-preview.jpg", alt: "A photo-led sample newsletter rendered by Trek Travel’s actual marketing system", width: 720, height: 612},
-    video: {src: "/videos/trek-walkthrough.mp4", poster: "/videos/trek-poster.jpg", captions: "/videos/trek-walkthrough.vtt", duration: "48 sec", chapters: [
+    preview: {src: "/images/products/trek-output-preview.jpg", alt: "A photo-led sample newsletter rendered by Trek Travel’s actual marketing system", width: 720, height: 900},
+    video: {src: "/videos/trek-walkthrough.mp4?v=current-design", poster: "/videos/trek-poster.jpg?v=current-design", captions: "/videos/trek-walkthrough.vtt?v=current-design", duration: "48 sec", chapters: [
+      {title:"See the finished newsletter",description:"The current Trek canvas design engine renders a photo-led newsletter from structured sample content."},
       {title:"Give the agent a brief",description:"The sample operator specifies the group, dates, transport, and activities in Trek’s actual console."},
       {title:"Open the saved draft",description:"The asset is linked to the conversation and waits for review."},
-      {title:"See the finished newsletter",description:"Trek’s original renderer turns structured content and selected photographs into a newsletter."},
       {title:"Read the trip details",description:"The rendered asset includes the trip description, dates, and a clear next step for the group leader."},
-      {title:"Reuse the workflow for print",description:"The same product also renders a day-by-day itinerary and a two-sided handout through its original print paths."},
+      {title:"Reuse the workflow for print",description:"The same product also renders a day-by-day itinerary and a two-sided handout through its current canvas renderers."},
       {title:"Ask for a revision",description:"Warmer wording and more free time are requested in the same saved conversation."},
       {title:"Review before approving",description:"The original review panel shows draft versions, further revision controls, and approval."},
       {title:"Record an approval or hold",description:"Captured sample outcomes show approval or hold. No content is sent from this sample environment."},
@@ -409,8 +410,11 @@ export const productTours: Record<CaseStudy["kind"], ProductTourContent> = {
   pricing: {
     title: "Revenue Radar",
     preview: productImage("radar-dashboard-preview", "Revenue Radar’s actual reporting dashboard · Sample data"),
-    video: {src: "/videos/radar-walkthrough.mp4", poster: "/videos/radar-poster.jpg", captions: "/videos/radar-walkthrough.vtt", duration: "34 sec", chapters: [
+    video: {src: "/videos/radar-walkthrough.mp4?v=chat", poster: "/videos/radar-poster.jpg?v=chat", captions: "/videos/radar-walkthrough.vtt?v=chat", duration: "43 sec", chapters: [
       {title:"Start with the operating picture",description:"Revenue Radar’s original demo dashboard shows sample bookings and reporting history."},
+      {title:"Ask the agent",description:"The operator asks why the sample recommendation is capped at $360."},
+      {title:"Get a grounded explanation",description:"The chat explains the ceiling and move limit and lists the pricing decision, listing pace, and PriceLabs settings it consulted. The captured reply is fictional sample content."},
+      {title:"Keep the conversation going",description:"A follow-up question explores slower booking pace before an operator decides whether to approve."},
       {title:"Check booking pace",description:"Listing pace surfaces occupancy, booking pace, and proposed changes for a fictional listing."},
       {title:"Explain the move and cap it",description:"Sample demand suggests $420; the configured $360 ceiling caps the proposal at +20% from $300."},
       {title:"Let the operator decide",description:"The approval queue shows the price change and rationale alongside Approve and Deny."},
