@@ -8,10 +8,9 @@ import {
   Check,
   Layers3,
 } from "lucide-react";
-import { cases, ownership } from "@/lib/content";
-import { MarketingDemo, PricingDemo } from "@/components/demos";
-import { MarketingVisual, PricingVisual } from "@/components/product-visuals";
-import { CodeEvidence } from "@/components/code-evidence";
+import { cases, ownership, productTours } from "@/lib/content";
+import { ProductTour } from "@/components/product-tour";
+import { ProductScreenshot } from "@/components/product-screenshot";
 
 export function generateStaticParams() {
   return cases.map((c) => ({ slug: c.slug }));
@@ -55,18 +54,18 @@ export default async function CaseStudyPage({
         </Link>
         <div className="case-hero-grid">
           <div>
-            <p className="section-kicker">{c.industry}</p>
+            <p className="section-kicker">{c.name} · {c.industry}</p>
             <h1>{c.title}</h1>
             <p className="case-summary">{c.summary}</p>
             <a href="#demonstration" className="button primary">
-              Explore the demonstration{" "}
+              Explore the product tour{" "}
               <ArrowRight size={16} aria-hidden="true" />
             </a>
           </div>
           <div className={`case-hero-visual stage-${c.kind}`}>
-            {c.kind === "marketing" ? <MarketingVisual /> : <PricingVisual />}
+            <ProductScreenshot media={productTours[c.kind].preview} />
             <span className="case-visual-caption">
-              Illustrative preview · Fictional sample data
+              Actual product interface · Sample data
             </span>
           </div>
         </div>
@@ -92,9 +91,8 @@ export default async function CaseStudyPage({
         <nav className="section-width" aria-label="Case study sections">
           <a href="#problem">The problem</a>
           <a href="#decisions">Product decisions</a>
-          <a href="#demonstration">Try the workflow</a>
+          <a href="#demonstration">Guided product tour</a>
           <a href="#architecture">Under the hood</a>
-          <a href="#implementation">Code & tests</a>
           <a href="#result">The result</a>
         </nav>
       </div>
@@ -180,12 +178,11 @@ export default async function CaseStudyPage({
               </h2>
             </div>
             <p>
-              {c.kind === "marketing"
-                ? "Choose an asset, build a draft, and try a revision."
-                : "Change the scenario and see how the rules respond."}
+              Follow captured interface states from a local sample environment. The controls below navigate screenshots; they do not operate either product.
             </p>
           </div>
-          {c.kind === "marketing" ? <MarketingDemo /> : <PricingDemo />}
+          <span id="implementation" />
+          <ProductTour content={productTours[c.kind]} />
         </div>
       </section>
       <section id="architecture" className="case-section section-width">
@@ -240,7 +237,6 @@ export default async function CaseStudyPage({
           ))}
         </div>
       </section>
-      <CodeEvidence slug={c.slug} />
       <section className="validation-section section-width">
         <div>
           <p className="section-kicker">Testing & evaluation</p>

@@ -29,14 +29,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Evan Camire | Builder & Operator",
     description:
-      "I build AI products around real work. Explore the products, the decisions, and the experience behind them.",
+      "I build AI for real work and real people. Explore the products, the decisions, and the experience behind them.",
     url: "/",
     images: [
       {
         url: "/social-preview.png",
         width: 1200,
         height: 630,
-        alt: "Evan Camire: I build AI products around real work.",
+        alt: "Evan Camire: I build AI for real work and real people.",
       },
     ],
     type: "website",

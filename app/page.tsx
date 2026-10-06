@@ -5,7 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Asterisk,
-  Code2,
   Github,
   Instagram,
   Linkedin,
@@ -18,8 +17,9 @@ import {
   profile,
   socialLinks,
   writing,
+  productTours,
 } from "@/lib/content";
-import { MarketingVisual, PricingVisual } from "@/components/product-visuals";
+import { ProductScreenshot } from "@/components/product-screenshot";
 
 const socialIcons = {
   email: Mail,
@@ -45,9 +45,9 @@ export default function Home() {
       >
         <div className="personal-hero-copy">
           <h1 id="hero-title">
-            I build AI products
+            I build AI for real work
             <br />
-            around real work<span className="blue-period">.</span>
+            and real people<span className="blue-period">.</span>
           </h1>
           <p className="hero-description">{profile.introduction}</p>
           <div className="hero-actions">
@@ -78,16 +78,24 @@ export default function Home() {
               })}
           </div>
         </div>
-        <figure className="hero-portrait">
-          <div className="portrait-frame">
+        <figure className="hero-gallery" aria-label="Photos of Evan Camire">
+          <div className="hero-gallery-grid">
+            <a className="gallery-photo gallery-portrait" href="/images/evan-headshot.webp" target="_blank" rel="noopener noreferrer" aria-label="Open Evan’s portrait in full size">
             <Image
               src="/images/evan-headshot.webp"
               alt="Evan Camire"
               width={1100}
               height={1600}
               priority
-              sizes="(max-width: 767px) 85vw, 35vw"
+              sizes="(max-width: 767px) 38vw, 18vw"
             />
+            </a>
+            <a className="gallery-photo gallery-conversation" href="/images/evan-conversation.webp" target="_blank" rel="noopener noreferrer" aria-label="Open photo of Evan at a table in full size">
+              <Image src="/images/evan-conversation.webp" alt="Evan smiling while seated at a table" width={1600} height={1067} priority sizes="(max-width: 767px) 50vw, 23vw" />
+            </a>
+            <a className="gallery-photo gallery-outdoors" href="/images/evan-outdoors.webp" target="_blank" rel="noopener noreferrer" aria-label="Open outdoor group photo in full size">
+              <Image src="/images/evan-outdoors.webp" alt="Evan with a group in an outdoor cold plunge" width={1600} height={1067} sizes="(max-width: 767px) 50vw, 23vw" />
+            </a>
           </div>
           <figcaption>
             <span>{profile.name}</span>
@@ -114,11 +122,7 @@ export default function Home() {
                 aria-label={"Read " + c.name + " case study"}
               >
                 <div className={"project-stage stage-" + c.kind}>
-                  {c.kind === "marketing" ? (
-                    <MarketingVisual />
-                  ) : (
-                    <PricingVisual />
-                  )}
+                  <ProductScreenshot media={productTours[c.kind].preview} />
                   <span className="project-view-icon">
                     <ArrowUpRight size={20} aria-hidden="true" />
                   </span>
@@ -147,20 +151,15 @@ export default function Home() {
                     Read the case study{" "}
                     <ArrowRight size={16} aria-hidden="true" />
                   </Link>
-                  <Link
-                    className="code-link"
-                    href={"/work/" + c.slug + "#implementation"}
-                  >
-                    <Code2 size={16} aria-hidden="true" /> Inspect the code
-                  </Link>
+
                 </div>
               </div>
             </article>
           ))}
         </div>
         <p className="work-note">
-          Client identities are anonymized. Product visuals and interactive
-          examples use fictional sample data.
+          Actual product interfaces, captured locally with fictional sample data.
+          Guided tours show recorded states and do not connect to client systems.
         </p>
       </section>
       <section
@@ -292,11 +291,11 @@ export default function Home() {
               </a>
               <a
                 className="case-link"
-                href={writing.site}
+                href={writing.source}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Newsletter site <ArrowUpRight size={16} aria-hidden="true" />
+                View the agent code <ArrowUpRight size={16} aria-hidden="true" />
               </a>
             </div>
           </div>

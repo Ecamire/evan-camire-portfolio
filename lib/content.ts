@@ -6,7 +6,7 @@ export const profile = {
   instagram: "https://www.instagram.com/evan.camire/",
   email: "evancamireventures@gmail.com",
   source: "https://github.com/Ecamire/evan-camire-portfolio",
-  headline: "I build AI products around real work.",
+  headline: "I build AI for real work and real people.",
   introduction:
     "From the first client conversation to the shipped product, I turn messy business problems into software people can actually use.",
   philosophy:
@@ -47,7 +47,7 @@ export const cases: CaseStudy[] = [
   {
     slug: "marketing-workflow",
     kind: "marketing",
-    name: "AI marketing and sales workflow",
+    name: "Trek Travel AI agent system",
     title: "An agent for newsletters, itineraries, and travel marketing.",
     description:
       "I built a travel operator’s marketing backend: business context, structured drafts, asset rendering, revisions, persistent work, and approval before delivery.",
@@ -141,7 +141,7 @@ export const cases: CaseStudy[] = [
   {
     slug: "pricing-workflow",
     kind: "pricing",
-    name: "AI pricing and revenue management",
+    name: "Revenue Radar",
     title: "A pricing engine connected to Hospitable and PriceLabs.",
     description:
       "I built the data integrations, pricing engine, daily review, and approved PriceLabs write path that replaced an operator’s manual morning pricing routine.",
@@ -265,7 +265,7 @@ export const experiences: Experience[] = [
   {
     company: "Openhour",
     role: "Co-founder & CTO",
-    dates: "2026–present",
+    dates: "July 2026–present",
     status: "Current",
     description:
       "I work directly with business owners to understand their operations, scope the product, and build custom AI workflows. I own the architecture and implementation, along with testing, evaluation, and delivery.",
@@ -277,12 +277,21 @@ export const experiences: Experience[] = [
     url: "https://openhour.io/",
   },
   {
-    company: "VitalityIP",
-    role: "Senior AI Experience Engineer",
-    dates: "March 2026–present",
+    company: "Maizon",
+    role: "Business Development Representative · Part-time",
+    dates: "September 2026–present",
     status: "Current",
+    description: "I run top-of-funnel sales campaigns through cold calls, email, text, and consistent follow-up. After Maizon acquired Short & Sweet Properties, I brought my experience working directly with owners into business development.",
+    focus: ["Prospecting", "Sales campaigns", "Owner relationships"],
+    url: "https://maizon.co/",
+  },
+  {
+    company: "VitalityIP",
+    role: "AI Experience Engineer",
+    dates: "March–October 2026",
+    status: "Past",
     description:
-      "At a health technology startup, I build the brand design system, code retail grocer partnership campaigns, and manage CRM outreach across grocery and investor relationships.",
+      "At a health technology startup, I built the tokenized design system, supported retail grocer campaigns and CRM outreach, developed investor-facing materials, and contributed to the mobile app’s UI and UX.",
     focus: ["Design systems", "Partnership campaigns", "CRM workflows"],
     url: "https://vitalityip.ai/",
   },
@@ -294,6 +303,7 @@ export const experiences: Experience[] = [
     description:
       "I built and operated a Charleston vacation-rental management business, handling owner relationships, sales, marketing, guest experience, and day-to-day operations. I sold the management business in 2026.",
     focus: ["Owner acquisition", "Rental operations", "Business handoff"],
+    url: "https://www.shortandsweetproperties.com/",
   },
   {
     company: "Fringe Golf Co.",
@@ -303,25 +313,25 @@ export const experiences: Experience[] = [
     description:
       "I led tournament event logistics and operations, and guided the use of AI workflows in brand strategy, design, and team collaboration.",
     focus: ["Event logistics", "Team collaboration", "Workflow design"],
+    url: "https://fringegolfus.com/",
   },
 ];
 export const biography = {
-  title: "The business side informs the build.",
+  title: "An entrepreneur at heart.",
   paragraphs: [
-    "I’m Evan, a Charleston-based entrepreneur and Openhour co-founder. Before building software for operators, I ran a vacation-rental management business myself. Selling to owners, managing the day-to-day work, and handing off the business gave me a practical view of what useful software needs to do.",
-    "I’m studying Commercial Real Estate Finance at the College of Charleston. My work spans engineering, sales, design, and operations. I enjoy the conversations that clarify a problem as much as the building that follows.",
-    "Outside work, running, health, and fitness are part of my routine. I’m interested in products that help people make better decisions and improve the way they spend their time.",
+    "I’m an entrepreneur at heart. I like meeting people, figuring out what they’re working through, and finding a way to help. That’s what led me from running a vacation-rental business in Charleston to building AI products at Openhour.",
+    "I’m a big believer in consistent, imperfect action. I’d rather get something into the real world, learn from it, and make it better than stay stuck planning to plan. Building matters to me, but so does following through with the people who trusted me to do it.",
+    "Health and fitness are a big part of my life. Running, training, and spending time outside keep me grounded. I’m finishing my degree at the College of Charleston, and I enjoy being around motivated people who push each other to get better.",
   ],
-  education:
-    "College of Charleston · B.S. in Commercial Real Estate Finance · In progress",
+  education: "B.S. Commercial Real Estate Finance, College of Charleston · Expected December 2026",
 };
 export const writing = {
   name: "Friday AI Brief",
   title: "What shipped. Why it matters. What to try.",
   description:
-    "I write a weekly AI newsletter for people building and running businesses. I translate new tools and releases into plain English, with practical ways to put them to work.",
-  archive: "https://openhour.io/newsletter",
-  site: "https://friday-ai-brief.netlify.app/",
+    "I built an AI agent that researches and writes a weekly AI newsletter for people building and running businesses. It turns new tools and releases into plain English, with practical ways to put them to work.",
+  archive: "https://www.openhour.io/newsletter",
+  source: "https://github.com/Ecamire/friday-ai-brief-agent",
 };
 export const socialLinks = [
   {
@@ -344,3 +354,54 @@ export const socialLinks = [
     kind: "instagram",
   },
 ] as const;
+
+
+export type ProductMedia = { src: string; alt: string; width: number; height: number };
+export type TourStep = { id: string; title: string; description: string; media: ProductMedia };
+export type TourVariant = { id: string; label: string; description: string; steps: TourStep[]; held: TourStep };
+export type ProductTourContent = { title: string; preview: ProductMedia; variants: TourVariant[] };
+const productImage = (filename: string, alt: string): ProductMedia => ({src: `/images/products/${filename}.jpg`, alt, width: 1100, height: filename === "radar-dashboard" ? 1417 : filename.startsWith("radar-") && filename.endsWith("-inputs") ? 915 : filename.startsWith("radar-") && filename !== "radar-dashboard-preview" ? 866 : 800});
+const trekVariant = (id: string, label: string): TourVariant => {
+  const media = (stage: string, alt: string) => productImage(`trek-${id}-${stage}`, `${label} · Trek Travel’s actual console with fictional sample data · ${alt}`);
+  return {
+    id, label, description: `Follow a sample ${label.toLowerCase()} through the Marketing agent’s saved conversation and review panel.`,
+    steps: [
+      {id: "request", title: "Start with the group’s brief", description: `The operator asks for a ${label.toLowerCase()} for a fictional three-day mountain weekend. The saved request carries the audience, dates, and trip requirements.`, media: media("request", "saved request")},
+      {id: "draft", title: "A draft, saved with the conversation", description: "The asset card keeps the rendered draft connected to its request. Review draft opens the actual piece inside the console; it is not an automatically delivered output.", media: media("draft", "draft asset card")},
+      {id: "revision", title: "Change the work without starting over", description: "The sample operator asks for warmer wording and more free time. The revised work stays in the same conversation, with earlier drafts available in the review panel.", media: media("revision", "revision request and updated draft")},
+      {id: "review", title: "Review the rendered asset", description: "The actual review panel shows the asset, draft versions, and a field for further changes. Newsletter and print assets use their own rendering paths. The sample contact information is fictional.", media: media("review", "rendered asset and revision controls")},
+      {id: "approved", title: "An explicit approval", description: "The captured sample records Demo operator’s approval. Approval is separate from delivery; this local sample environment sends nothing and has no client connection.", media: media("approved", "recorded sample approval")},
+    ],
+    held: {id: "held", title: "Hold it for more work", description: "The captured sample is held by Demo operator. The draft remains available for changes and no delivery is triggered. This is a recorded interface state, not an action on a client’s product.", media: media("held", "held sample asset")},
+  };
+};
+const radarVariant = (id: string, label: string, explanation: string): TourVariant => {
+  const media = (stage: string, alt: string) => productImage(`radar-${id}-${stage}`, `Revenue Radar’s actual dashboard with fictional sample data · ${label} · ${alt}`);
+  return {
+    id, label, description: explanation,
+    steps: [
+      {id: "dashboard", title: "See the operating picture", description: "The existing demo builder supplies fictional listings, bookings, signals, and reporting history to the original dashboard. These figures demonstrate the interface; they are not client performance results.", media: productImage("radar-dashboard", "Revenue Radar reporting dashboard · Fictional sample bookings and demand signals")},
+      {id: "inputs", title: "Start with the booking inputs", description: "Listing pace makes occupancy, booking pace, and proposed changes visible. Harbor Cottage is a fictional listing used throughout this scenario.", media: media("inputs", "listing pace and occupancy inputs")},
+      {id: "recommendation", title: "Explain the move and its limits", description: explanation + " The proposal includes its rationale, minimum stay, status, and configured pricing limits.", media: media("recommendation", "explained recommendation within configured limits")},
+      {id: "review", title: "Keep the operator in control", description: "The approval queue surfaces the nightly change and its reasoning alongside Approve and Deny. The operator can also defer a decision by leaving the proposal pending.", media: media("review", "operator approval queue")},
+      {id: "approved", title: "Record the sample outcome", description: "The captured change history shows a fictional approved override and the approving operator. It illustrates the product’s audit trail. No PriceLabs write or external action occurred during capture.", media: media("approved", "fictional approved change history")},
+    ],
+    held: {id: "held", title: "Defer the decision", description: "The sample proposal remains pending in the approval queue. Revenue Radar’s native controls are Approve and Deny; holding here means leaving the decision for later, without authorizing a price change.", media: media("held", "proposal left pending for later review")},
+  };
+};
+export const productTours: Record<CaseStudy["kind"], ProductTourContent> = {
+  marketing: {
+    title: "Trek Travel AI agent system",
+    preview: productImage("trek-newsletter-review", "Trek Travel’s actual asset review panel · Sample newsletter"),
+    variants: [trekVariant("newsletter", "Newsletter"), trekVariant("itinerary", "Itinerary"), trekVariant("handout", "Handout")],
+  },
+  pricing: {
+    title: "Revenue Radar",
+    preview: productImage("radar-dashboard-preview", "Revenue Radar’s actual reporting dashboard · Sample data"),
+    variants: [
+      radarVariant("normal", "Normal demand", "Ahead-of-year booking pace supports a sample $300 → $324 recommendation (+8%), within the $240–$360 range and 20% move limit."),
+      radarVariant("capped", "Capped demand", "A sample event suggests $420, but the configured $360 ceiling caps the proposal at $360 (+20%)."),
+      radarVariant("slow", "Slower bookings", "Below-year booking pace supports a sample $300 → $276 recommendation (−8%), while respecting the $240 floor and 20% move limit."),
+    ],
+  },
+};

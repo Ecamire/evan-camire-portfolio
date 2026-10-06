@@ -75,27 +75,40 @@ figure {
   margin-top: 28px;
   gap: 20px;
 }
-.hero-portrait {
+.hero-gallery {
   min-width: 0;
-  padding: 12px 9px 0 15px;
+  margin: 0;
 }
-.portrait-frame {
+.hero-gallery-grid {
   position: relative;
+  isolation: isolate;
+  height: clamp(390px, 39vw, 530px);
+}
+.gallery-photo {
+  position: absolute;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
   background: #dfddd6;
   border: 1px solid var(--ink);
-  border-radius: 48% 48% 3px 3px;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  box-shadow: 12px 12px 0 #dfddd6;
+  border-radius: 50% 50% 3px 3px;
+  box-shadow: 7px 7px 0 #dfddd6;
 }
-.portrait-frame img {
+.gallery-photo img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
-  object-position: center 34%;
+  object-fit: contain;
 }
-.hero-portrait figcaption {
+.gallery-portrait { width: 58%; height: 80%; left: 0; top: 12%; z-index: 2; }
+.gallery-portrait img { object-position: center bottom; }
+.gallery-conversation { width: 61%; height: 45%; right: 0; top: 0; z-index: 1; background: #c9beb0; }
+.gallery-conversation img { object-position: center 70%; }
+.gallery-outdoors { width: 64%; height: 45%; right: -2%; bottom: 0; z-index: 3; background: #b7c0ad; }
+.gallery-outdoors img { object-position: center 70%; }
+.gallery-photo:focus-visible { z-index: 4; outline: 3px solid var(--blue); outline-offset: 4px; }
+.hero-gallery figcaption {
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -103,7 +116,7 @@ figure {
   font-size: 13px;
   color: var(--muted);
 }
-.hero-portrait figcaption span:first-child {
+.hero-gallery figcaption span:first-child {
   color: var(--ink);
   font-weight: 600;
 }
@@ -578,9 +591,7 @@ figure {
   .personal-hero .hero-description {
     font-size: 19px;
   }
-  .hero-portrait {
-    padding-left: 0;
-  }
+  .hero-gallery-grid { height: 370px; }
   .social-paper {
     padding: 7px;
   }
@@ -676,16 +687,12 @@ figure {
     font-size: 12px;
     padding-inline: 11px;
   }
-  .hero-portrait {
-    width: min(330px, 87%);
+  .hero-gallery {
+    width: min(520px, 100%);
     margin: 0 auto;
-    padding: 7px 0 0;
   }
-  .portrait-frame {
-    aspect-ratio: 5 / 6;
-    box-shadow: 8px 8px 0 #dfddd6;
-  }
-  .hero-portrait figcaption {
+  .hero-gallery-grid { height: clamp(360px, 95vw, 500px); margin-right: 7px; }
+  .hero-gallery figcaption {
     font-size: 12px;
     padding-top: 19px;
   }
@@ -871,4 +878,56 @@ figure {
   background: #24496f;
   padding: 2px 5px;
   border-radius: 2px;
+}
+
+/* Original product captures replace the earlier illustrative previews. */
+.project-stage,
+.case-hero-visual { height: auto; padding: 0; border-radius: 3px; display: block; background: #eceae4; }
+.product-screenshot { display: block; width: 100%; height: auto; object-fit: contain; transform: none; }
+.case-hero-visual .product-screenshot { width: 100%; }
+.case-visual-caption { position: static; display: block; padding: 10px 14px; color: var(--muted); font-size: 12px; background: #faf9f6; }
+.product-tour { background: #faf9f6; border: 1px solid var(--line); padding: 28px; }
+.tour-header { display: flex; justify-content: space-between; align-items: center; gap: 25px; }
+.tour-evidence-label { max-width: 430px; font-size: 13px; font-weight: 600; color: var(--blue); }
+.tour-picker { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+.tour-picker select { background: #fff; border: 1px solid #aaa69d; border-radius: 2px; padding: 10px 28px 10px 12px; color: var(--ink); font: inherit; min-height: 44px; }
+.tour-scenario { margin-top: 18px; max-width: 740px; font-size: 16px; color: var(--muted); }
+.tour-step-list { display: flex; list-style: none; padding: 24px 0; gap: 18px; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
+.tour-step-list li { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.tour-step-list li span { width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; }
+.tour-step-list li[aria-current] { color: var(--blue); font-weight: 600; }
+.tour-step-list li[aria-current] span { background: var(--blue); color: #fff; border-color: var(--blue); }
+.tour-capture { margin: 0; }
+.tour-capture > a { display: block; border: 1px solid #b5b4ae; background: #eceae4; }
+.tour-capture img { display: block; width: 100%; height: auto; }
+.tour-capture figcaption { display: flex; justify-content: space-between; gap: 15px; padding-block: 12px; font-size: 12px; color: var(--muted); }
+.tour-capture figcaption a { display: flex; align-items: center; gap: 4px; text-decoration: underline; text-underline-offset: 4px; color: var(--ink); }
+.tour-step-copy { padding-block: 20px; min-height: 160px; }
+.tour-count { font-size: 12px; color: var(--blue); margin-bottom: 8px; }
+.tour-step-copy h3 { font-size: 27px; letter-spacing: -.04em; margin-bottom: 10px; }
+.tour-step-copy > p:last-child { max-width: 790px; color: var(--muted); font-size: 17px; line-height: 1.55; }
+.tour-branches { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--line); padding-top: 18px; font-size: 14px; }
+.tour-branches button { padding: 10px 16px; border: 1px solid #9a978f; border-radius: 2px; color: var(--ink); min-height: 44px; }
+.tour-branches button[aria-pressed=true] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.tour-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 22px; }
+.tour-controls button:disabled { opacity: .4; cursor: default; }
+.tour-reset { display: flex; align-items: center; gap: 6px; font-size: 14px; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; }
+.tour-note { font-size: 13px; color: var(--muted); padding-top: 20px; border-top: 1px solid var(--line); margin-top: 24px; max-width: 800px; }
+.product-tour button:focus-visible,
+.product-tour select:focus-visible,
+.product-tour a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+@media(max-width: 767px) {
+ .product-tour { padding: 16px; }
+ .tour-header { align-items: start; flex-direction: column; gap: 12px; }
+ .tour-evidence-label { font-size: 12px; }
+ .tour-picker { width: 100%; justify-content: space-between; }
+ .tour-step-list { gap: 0; justify-content: space-between; }
+ .tour-step-list li { font-size: 0; }
+ .tour-step-list li span { font-size: 12px; }
+ .tour-capture figcaption { flex-direction: column; gap: 8px; }
+ .tour-step-copy h3 { font-size: 24px; }
+ .tour-step-copy > p:last-child { font-size: 16px; }
+ .tour-controls { gap: 8px; flex-wrap: wrap; }
+ .tour-controls .button { padding-inline: 12px; font-size: 13px; }
+ .tour-reset { font-size: 12px; }
 }
