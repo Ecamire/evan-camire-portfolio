@@ -17,9 +17,9 @@ import {
   profile,
   socialLinks,
   writing,
-  productTours,
+  workGalleries,
 } from "@/lib/content";
-import { ProductVideo } from "@/components/product-video";
+import { WorkGallery } from "@/components/work-gallery";
 
 const socialIcons = {
   email: Mail,
@@ -111,18 +111,17 @@ export default function Home() {
         <SectionRule title="Selected work" id="work-title" />
         <p className="section-intro">Two products I took from client discovery to delivery. See them in action.</p>
         <div className="work-features">
-          {cases.map((c, i) => (
+          {cases.map((c) => (
             <article key={c.slug} className="work-feature">
               <div className="work-feature-copy">
-                <p className="project-industry">0{i + 1} / {c.industry}</p>
                 <h3><Link href={"/work/" + c.slug}>{c.name}</Link></h3>
-                <p className="work-feature-description">{c.kind === "marketing"
-                  ? "A short trip brief becomes a newsletter, itinerary, or handout. Revise it in the conversation, review the finished piece, and approve it."
-                  : "Booking pace and demand signals become pricing proposals. Ask the agent why, check the limits, and decide what changes."}</p>
-                <p className="work-feature-result">{c.result}</p>
-                <Link className="case-link" href={"/work/" + c.slug}>Explore the full case study <ArrowRight size={16} aria-hidden="true" /></Link>
+                <p className="work-feature-description">{workGalleries[c.kind].summary}</p>
               </div>
-              <ProductVideo content={productTours[c.kind]} />
+              <WorkGallery content={workGalleries[c.kind]} />
+              <div className="work-feature-footer">
+                <p className="work-feature-result">{c.result}</p>
+                <Link className="case-link" href={"/work/" + c.slug} aria-label={`Read the ${c.name} case study`}>Read the case study <ArrowRight size={16} aria-hidden="true" /></Link>
+              </div>
             </article>
           ))}
         </div>
@@ -134,26 +133,9 @@ export default function Home() {
         aria-labelledby="experience-title"
       >
         <SectionRule title="Experience" id="experience-title" />
-        <div className="experience-layout">
-          <div className="experience-introduction">
-            <h3>
-              Building the product.
-              <br />
-              Running the business.
-            </h3>
-            <p>
-              Client work, startup teams, and a business of my own. Each has
-              given me a different view of the work behind a useful product.
-            </p>
-            <a
-              href="https://openhour.io/"
-              className="case-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Visit Openhour <ArrowUpRight size={16} aria-hidden="true" />
-            </a>
-          </div>
+        <p className="section-intro experience-introduction">
+          Client work, startup teams, and a business of my own. Each has given me a different view of the work behind a useful product.
+        </p>
           <ol className="experience-list">
             {experiences.map((e) => (
               <li key={e.company}>
@@ -190,7 +172,6 @@ export default function Home() {
               </li>
             ))}
           </ol>
-        </div>
       </section>
       <section
         id="about"

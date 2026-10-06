@@ -428,3 +428,33 @@ export const productTours: Record<CaseStudy["kind"], ProductTourContent> = {
     ],
   },
 };
+
+export type WorkGalleryContent = {
+  title: string;
+  summary: string;
+  initialIndex: number;
+  phases: { label: string; description: string; media: ProductMedia }[];
+};
+
+export const workGalleries: Record<CaseStudy["kind"], WorkGalleryContent> = {
+  marketing: {
+    title: "Trek Travel AI agent system",
+    summary: "Turn a trip brief into a designed newsletter, itinerary, or handout, with revisions and human approval.",
+    initialIndex: 1,
+    phases: [
+      { label: "Request", description: "Give the agent the group, dates, and trip requirements in one conversation.", media: productImage("trek-newsletter-request", "Trek’s current chat console · A fictional newsletter request") },
+      { label: "Review", description: "Open the finished newsletter, compare drafts, and review the layout before approving.", media: productImage("trek-newsletter-review", "Trek’s current review panel · A designed sample newsletter and draft controls") },
+      { label: "Revise", description: "Ask for a change. The updated draft stays connected to the original request.", media: productImage("trek-newsletter-revision", "Trek’s current chat console · A fictional revision and saved draft") },
+    ],
+  },
+  pricing: {
+    title: "Revenue Radar",
+    summary: "Connect booking pace and demand to pricing proposals. Ask the agent why, then decide what changes.",
+    initialIndex: 1,
+    phases: [
+      { label: "Dashboard", description: "See the bookings, reporting history, and demand signals behind daily pricing decisions.", media: productImage("radar-dashboard-preview", "Revenue Radar reporting dashboard · Fictional booking and pricing figures") },
+      { label: "Chat", description: "Ask why a price was recommended. The explanation shows the limits and sources consulted.", media: productImage("pricing-chat-answer", "Revenue Radar chat · A fictional explanation of a capped recommendation") },
+      { label: "Review", description: "Review the proposed change and its reasoning before authorizing a price adjustment.", media: productImage("radar-capped-review", "Revenue Radar approval queue · A fictional proposal within configured limits") },
+    ],
+  },
+};
