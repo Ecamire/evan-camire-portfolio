@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { cases, ownership, productTours } from "@/lib/content";
 import { ProductTour } from "@/components/product-tour";
+import { ProductVideo } from "@/components/product-video";
 import { ProductScreenshot } from "@/components/product-screenshot";
 
 export function generateStaticParams() {
@@ -181,6 +182,12 @@ export default async function CaseStudyPage({
               Follow captured interface states from a local sample environment. The controls below navigate screenshots; they do not operate either product.
             </p>
           </div>
+          <ProductVideo content={productTours[c.kind]} />
+          {c.kind === "marketing" && <div className="sample-output-links" aria-label="Full-size sample outputs">
+            <p>Open the rendered sample outputs</p>
+            <div>{["newsletter", "itinerary", "handout"].map((asset) => <a key={asset} href={`/images/products/trek-${asset}-output.jpg`} target="_blank" rel="noopener noreferrer">{asset[0].toUpperCase() + asset.slice(1)} <ArrowUpRight size={15} aria-hidden="true" /></a>)}</div>
+            <small>Original renderers · Fictional content · Photography: NPS / Victoria Stauffenberg</small>
+          </div>}
           <span id="implementation" />
           <ProductTour content={productTours[c.kind]} />
         </div>

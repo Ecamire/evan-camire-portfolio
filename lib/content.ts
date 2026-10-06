@@ -359,7 +359,8 @@ export const socialLinks = [
 export type ProductMedia = { src: string; alt: string; width: number; height: number };
 export type TourStep = { id: string; title: string; description: string; media: ProductMedia };
 export type TourVariant = { id: string; label: string; description: string; steps: TourStep[]; held: TourStep };
-export type ProductTourContent = { title: string; preview: ProductMedia; variants: TourVariant[] };
+export type ProductVideoContent = { src: string; poster: string; captions: string; duration: string; chapters: {title: string; description: string}[] };
+export type ProductTourContent = { title: string; preview: ProductMedia; video: ProductVideoContent; variants: TourVariant[] };
 const productImage = (filename: string, alt: string): ProductMedia => ({src: `/images/products/${filename}.jpg`, alt, width: 1100, height: filename === "radar-dashboard" ? 1417 : filename.startsWith("radar-") && filename.endsWith("-inputs") ? 915 : filename.startsWith("radar-") && filename !== "radar-dashboard-preview" ? 866 : 800});
 const trekVariant = (id: string, label: string): TourVariant => {
   const media = (stage: string, alt: string) => productImage(`trek-${id}-${stage}`, `${label} · Trek Travel’s actual console with fictional sample data · ${alt}`);
@@ -392,12 +393,30 @@ const radarVariant = (id: string, label: string, explanation: string): TourVaria
 export const productTours: Record<CaseStudy["kind"], ProductTourContent> = {
   marketing: {
     title: "Trek Travel AI agent system",
-    preview: productImage("trek-newsletter-review", "Trek Travel’s actual asset review panel · Sample newsletter"),
+    preview: {src: "/images/products/trek-output-preview.jpg", alt: "A photo-led sample newsletter rendered by Trek Travel’s actual marketing system", width: 720, height: 612},
+    video: {src: "/videos/trek-walkthrough.mp4", poster: "/videos/trek-poster.jpg", captions: "/videos/trek-walkthrough.vtt", duration: "48 sec", chapters: [
+      {title:"Give the agent a brief",description:"The sample operator specifies the group, dates, transport, and activities in Trek’s actual console."},
+      {title:"Open the saved draft",description:"The asset is linked to the conversation and waits for review."},
+      {title:"See the finished newsletter",description:"Trek’s original renderer turns structured content and selected photographs into a newsletter."},
+      {title:"Read the trip details",description:"The rendered asset includes the trip description, dates, and a clear next step for the group leader."},
+      {title:"Reuse the workflow for print",description:"The same product also renders a day-by-day itinerary and a two-sided handout through its original print paths."},
+      {title:"Ask for a revision",description:"Warmer wording and more free time are requested in the same saved conversation."},
+      {title:"Review before approving",description:"The original review panel shows draft versions, further revision controls, and approval."},
+      {title:"Record an approval or hold",description:"Captured sample outcomes show approval or hold. No content is sent from this sample environment."},
+    ]},
     variants: [trekVariant("newsletter", "Newsletter"), trekVariant("itinerary", "Itinerary"), trekVariant("handout", "Handout")],
   },
   pricing: {
     title: "Revenue Radar",
     preview: productImage("radar-dashboard-preview", "Revenue Radar’s actual reporting dashboard · Sample data"),
+    video: {src: "/videos/radar-walkthrough.mp4", poster: "/videos/radar-poster.jpg", captions: "/videos/radar-walkthrough.vtt", duration: "34 sec", chapters: [
+      {title:"Start with the operating picture",description:"Revenue Radar’s original demo dashboard shows sample bookings and reporting history."},
+      {title:"Check booking pace",description:"Listing pace surfaces occupancy, booking pace, and proposed changes for a fictional listing."},
+      {title:"Explain the move and cap it",description:"Sample demand suggests $420; the configured $360 ceiling caps the proposal at +20% from $300."},
+      {title:"Let the operator decide",description:"The approval queue shows the price change and rationale alongside Approve and Deny."},
+      {title:"Record the outcome",description:"The sample change log records the approved move and operator. No external price is changed."},
+      {title:"Leave a proposal pending",description:"Holding a decision leaves the proposal pending without authorizing a price change."},
+    ]},
     variants: [
       radarVariant("normal", "Normal demand", "Ahead-of-year booking pace supports a sample $300 → $324 recommendation (+8%), within the $240–$360 range and 20% move limit."),
       radarVariant("capped", "Capped demand", "A sample event suggests $420, but the configured $360 ceiling caps the proposal at $360 (+20%)."),

@@ -19,7 +19,7 @@ import {
   writing,
   productTours,
 } from "@/lib/content";
-import { ProductScreenshot } from "@/components/product-screenshot";
+import { ProductVideo } from "@/components/product-video";
 
 const socialIcons = {
   email: Mail,
@@ -109,58 +109,24 @@ export default function Home() {
         aria-labelledby="work-title"
       >
         <SectionRule title="Selected work" id="work-title" />
-        <p className="section-intro">
-          Two client products I owned from the first conversation through
-          architecture, implementation, testing, evaluation, and delivery.
-        </p>
-        <div className="project-grid">
-          {cases.map((c) => (
-            <article key={c.slug} className={"project-card project-" + c.kind}>
-              <Link
-                className="project-image-link"
-                href={"/work/" + c.slug}
-                aria-label={"Read " + c.name + " case study"}
-              >
-                <div className={"project-stage stage-" + c.kind}>
-                  <ProductScreenshot media={productTours[c.kind].preview} />
-                  <span className="project-view-icon">
-                    <ArrowUpRight size={20} aria-hidden="true" />
-                  </span>
-                </div>
-              </Link>
-              <div className="project-copy">
-                <p className="project-industry">{c.industry}</p>
-                <Link href={"/work/" + c.slug}>
-                  <h3>{c.name}</h3>
-                </Link>
-                <p>{c.description}</p>
-                <ul className="project-implementation">
-                  {c.implementation.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <div className="project-result">
-                  <strong>{c.metric}</strong>
-                  <span>
-                    {c.metricContext}
-                    <small>Client-reported</small>
-                  </span>
-                </div>
-                <div className="project-links">
-                  <Link className="case-link" href={"/work/" + c.slug}>
-                    Read the case study{" "}
-                    <ArrowRight size={16} aria-hidden="true" />
-                  </Link>
-
-                </div>
+        <p className="section-intro">Two products I took from client discovery to delivery. See them in action.</p>
+        <div className="work-features">
+          {cases.map((c, i) => (
+            <article key={c.slug} className="work-feature">
+              <div className="work-feature-copy">
+                <p className="project-industry">0{i + 1} / {c.industry}</p>
+                <h3><Link href={"/work/" + c.slug}>{c.name}</Link></h3>
+                <p className="work-feature-description">{c.kind === "marketing"
+                  ? "A short trip brief becomes a newsletter, itinerary, or handout. Revise it in the conversation, review the finished piece, and approve it."
+                  : "Booking pace and demand signals become explained pricing proposals. The operator reviews the limits and decides what changes."}</p>
+                <p className="work-feature-result">{c.result}</p>
+                <Link className="case-link" href={"/work/" + c.slug}>Explore the full case study <ArrowRight size={16} aria-hidden="true" /></Link>
               </div>
+              <ProductVideo content={productTours[c.kind]} />
             </article>
           ))}
         </div>
-        <p className="work-note">
-          Actual product interfaces, captured locally with fictional sample data.
-          Guided tours show recorded states and do not connect to client systems.
-        </p>
+
       </section>
       <section
         id="experience"
