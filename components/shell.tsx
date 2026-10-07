@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { profile } from "@/lib/content";
 
 export function Header() {
@@ -31,9 +30,6 @@ export function Footer() {
         </Link>
         <p>{profile.location}</p>
       </div>
-      <a href={profile.source} target="_blank" rel="noopener noreferrer">
-        View portfolio source <ArrowUpRight size={16} aria-hidden="true" />
-      </a>
       <span className="footer-year">
         © {new Date().getFullYear()} Evan Camire
       </span>
