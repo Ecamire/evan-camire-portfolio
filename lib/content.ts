@@ -457,7 +457,7 @@ export const workGalleries: Record<CaseStudy["kind"], WorkGalleryContent> = {
   },
 };
 
-export const trekDemoUrl = "https://trek-portfolio-demo.vercel.app/";
+export const trekDemoUrl = "https://demo.trektravelhq.com/";
 export const trekSamples = [
  {kind:"newsletter",label:"Newsletter",title:"A river-first newsletter",description:"An audience-specific introduction, two trips, upcoming dates, and a clear next step for the reader.",request:"Write a newsletter for Harbor Community Club about the riverside day trip and our upcoming Blue Ridge weekend.",src:"/samples/trek/newsletter"},
  {kind:"itinerary",label:"Itinerary",title:"Three days, planned out",description:"A day-by-day schedule with meals, transportation, inclusions, and practical details for the group leader.",request:"Build a three-day Blue Ridge itinerary for November 6–8, including transport and selected meals.",src:"/samples/trek/itinerary"},
