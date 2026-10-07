@@ -459,7 +459,7 @@ export const workGalleries: Record<CaseStudy["kind"], WorkGalleryContent> = {
 
 export const trekDemoUrl = "https://demo.trektravelhq.com/";
 export const trekSamples = [
- {kind:"newsletter",label:"Newsletter",title:"A river-first newsletter",description:"An audience-specific introduction, two trips, upcoming dates, and a clear next step for the reader.",request:"Write a newsletter for Harbor Community Club about the riverside day trip and our upcoming Blue Ridge weekend.",src:"/samples/trek/newsletter"},
- {kind:"itinerary",label:"Itinerary",title:"Three days, planned out",description:"A day-by-day schedule with meals, transportation, inclusions, and practical details for the group leader.",request:"Build a three-day Blue Ridge itinerary for November 6–8, including transport and selected meals.",src:"/samples/trek/itinerary"},
- {kind:"handout",label:"Handout",title:"Take learning outside",description:"A school field-trip handout with nature, history, planning support, and a layout designed to be handed across a table.",request:"Make a school handout for a nature and local-history field trip in the Blue Ridge.",src:"/samples/trek/handout"}
+ {kind:"newsletter",label:"Newsletter",title:"Christmas Lights Await",description:"The actual agent-created newsletter: an opening letter, upcoming trips, generated posters, and supporting stories for senior groups.",request:"Saved from the product library: Christmas Lights Await: Branson & Biltmore.",src:"/samples/trek/newsletter"},
+ {kind:"itinerary",label:"Trip letter",title:"Jersey Boys: final trip details",description:"The actual traveler-information graphic, bringing the date, departure point, return time, and final instructions into one designed piece.",request:"Saved from the product library: Jersey Boys, Play Day at the Saenger Theatre.",src:"/samples/trek/itinerary"},
+ {kind:"handout",label:"Flyer",title:"Fall Foliage Tour",description:"The actual agent-created flyer, combining generated travel imagery, a bold headline, and a clear invitation for the group leader.",request:"Saved from the product library: Fall Foliage Tour.",src:"/samples/trek/handout"}
 ] as const;

@@ -1,0 +1,52 @@
+{
+  "captured": "2026-10-07",
+  "source": "Saved agent-created marketing assets, exported read-only from the authenticated Trek product library.",
+  "html_changes": "Local asset URLs; removed live contact/unsubscribe links, tracking script and sender headshot; responsive fit. Campaign copy and layout retained.",
+  "assets": [
+    {
+      "file": "trek-logo.png",
+      "sha256": "0228e45d7365d688e41defd49307f6f4697fffa95ca245cf98519d8ba0050a12",
+      "unchanged_original": true
+    },
+    {
+      "file": "christmas-banner.jpg",
+      "sha256": "6fd27c8a7e38ba3395297b1d09327010ff5dffe3798a577316544acd6c5bbfb4",
+      "unchanged_original": true
+    },
+    {
+      "file": "biltmore-poster.jpg",
+      "sha256": "fa5ae3411b9f5d079a3ac04da51b1d9550155c42402ac0364882e0983dae1dc1",
+      "unchanged_original": true
+    },
+    {
+      "file": "branson-poster.jpg",
+      "sha256": "489f77f42cff1a919b16cb5e61ab25d290838e17149414f07d105db4388bc649",
+      "unchanged_original": true
+    },
+    {
+      "file": "washington-poster.jpg",
+      "sha256": "de96e27cf51491b9350b70db61b37b683c9875ad80f1f8c55c6f6b8fbc2e0429",
+      "unchanged_original": true
+    },
+    {
+      "file": "group-travel.png",
+      "sha256": "1cd5a2680e04989a0bbd81bdf5919e766459e83c173612043d4da919ff1c217b",
+      "unchanged_original": true
+    },
+    {
+      "file": "fellowship.png",
+      "sha256": "cd38ac2ed10785eeef035a8adb2e1327f227bc39f24a50eb7d6cf9642456e796",
+      "unchanged_original": true
+    },
+    {
+      "file": "trip-letter.jpg",
+      "sha256": "37d51f6081fe91a14fca368858ed27d614d439ea0da231a685c720f33ec79acc",
+      "unchanged_original": true
+    },
+    {
+      "file": "fall-flyer.jpg",
+      "sha256": "47a4bf8cd286c86e8ffe874a35520c39672ccac189be617af16353de48df09e1",
+      "unchanged_original": true
+    }
+  ]
+}
