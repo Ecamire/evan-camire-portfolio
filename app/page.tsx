@@ -20,6 +20,7 @@ import {
   workGalleries,
 } from "@/lib/content";
 import { WorkGallery } from "@/components/work-gallery";
+import { DelayedAccent } from "@/components/delayed-accent";
 
 const socialIcons = {
   email: Mail,
@@ -45,9 +46,9 @@ export default function Home() {
       >
         <div className="personal-hero-copy">
           <h1 id="hero-title">
-            I build AI for real work
+            I build AI for <DelayedAccent>real work</DelayedAccent>
             <br />
-            and real people<span className="blue-period">.</span>
+            and <DelayedAccent>real people</DelayedAccent><span className="blue-period">.</span>
           </h1>
           <p className="hero-description">{profile.introduction}</p>
           <div className="hero-actions">
@@ -256,9 +257,7 @@ export default function Home() {
         <SectionRule title="Get in touch" id="contact-title" />
         <div className="contact-intro">
           <h3>
-            Have something
-            <br />
-            in mind<span className="blue-period">?</span>
+            <DelayedAccent>Have something<br />in mind</DelayedAccent><span className="blue-period">?</span>
           </h3>
           <p>
             For a role, a client project, or a conversation about what you’re
