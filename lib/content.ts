@@ -463,3 +463,37 @@ export const trekSamples = [
  {kind:"itinerary",label:"Trip letter",title:"Jersey Boys: final trip details",description:"The actual traveler-information graphic, bringing the date, departure point, return time, and final instructions into one designed piece.",request:"Saved from the product library: Jersey Boys, Play Day at the Saenger Theatre.",src:"/samples/trek/itinerary"},
  {kind:"handout",label:"Flyer",title:"Fall Foliage Tour",description:"The actual agent-created flyer, combining generated travel imagery, a bold headline, and a clear invitation for the group leader.",request:"Saved from the product library: Fall Foliage Tour.",src:"/samples/trek/handout"}
 ] as const;
+
+export const radarDemoUrl = "https://revenue-radar-portfolio-demo.vercel.app/";
+
+export type CaseBrief = {
+  introduction: string;
+  why: string;
+  build: {title: string; text: string}[];
+  value: string;
+  detail: string;
+};
+export const caseBriefs: Record<CaseStudy["kind"], CaseBrief> = {
+  marketing: {
+    introduction: "A marketing and sales agent that turns a short request into a finished newsletter, itinerary, or handout.",
+    why: "The owner was writing copy, finding images, formatting assets, and coordinating delivery by hand. He needed finished marketing materials, with a way to revise and approve them.",
+    build: [
+      {title: "Give the agents business context", text: "I built TypeScript agents with the company’s trip information, audience, voice, and tools."},
+      {title: "Turn requests into finished assets", text: "The backend creates copy and visuals, renders the asset, and saves the work in a shared library."},
+      {title: "Keep the owner in control", text: "Revisions preserve context. Approval rules control delivery, and saved work survives interrupted sessions."},
+    ],
+    value: "The owner can create marketing materials with a few prompts, review the finished asset, and get back to selling trips.",
+    detail: "I test content quality, rendering, saved-work recovery, and approval gates. Sentry and Langfuse help trace failures and model cost. The application owns the business state; changing model providers still requires adapter changes and validation.",
+  },
+  pricing: {
+    introduction: "An agent that updates vacation-rental prices every morning at 5 AM Eastern, with chat to explain its decisions.",
+    why: "The operator spent two hours each morning checking bookings and manually overriding PriceLabs prices. He needed that routine handled automatically, within his pricing rules.",
+    build: [
+      {title: "Connect the operating data", text: "I integrated Hospitable bookings and calendars with PriceLabs recommendations and local demand signals."},
+      {title: "Automate within pricing rules", text: "A TypeScript engine evaluates each available night. Floors, ceilings, and move limits control automatic updates; exceptions require approval."},
+      {title: "Make every change explainable", text: "The backend records prices and reasons. Chat answers questions about decisions, while reports track bookings and pricing activity."},
+    ],
+    value: "Eligible prices are updated before the operator starts his day. He reviews exceptions and asks the agent why, instead of repricing listings by hand.",
+    detail: "I test data normalization, price limits, approvals, and failed-dependency behavior before live writes. Model retries and deterministic fallbacks keep the cycle resilient. Langfuse and usage tracking make calls and costs visible. Provider changes require adapters and validation.",
+  },
+};
