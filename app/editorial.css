@@ -965,3 +965,56 @@ figure {
 .sample-output-links small { display: block; color: var(--muted); margin-top: 13px; font-size: 12px; }
 
 .product-video video::cue { font-family: "Source Sans 3", sans-serif; font-size: 17px; color: #fff; background: rgba(15, 21, 28, .94); }
+
+/* Case studies: readable narrative, full-width original interfaces, native output text. */
+.focused-case .case-hero{padding:48px 0 36px}
+.focused-case .case-hero>.section-kicker{margin-top:30px}
+.focused-case .case-hero h1{max-width:1060px;font-size:clamp(38px,5.5vw,72px);line-height:1.08;margin:14px 0 23px;letter-spacing:-.055em}
+.focused-case .case-summary{max-width:810px;font-size:22px;line-height:1.5;margin:0}
+.case-intro-bottom{display:flex;justify-content:space-between;gap:24px;align-items:center;margin-top:28px;border-top:1px solid var(--line);padding-top:24px}
+.case-result{font-size:17px;font-weight:650;margin:0;max-width:560px}
+.demo-boundary{color:var(--muted);font-size:14px;margin-top:18px;max-width:700px}
+.focused-case .case-jump-bar{position:static}
+.focused-case .case-jump-bar>div{display:flex;gap:32px;padding-block:17px;overflow:auto}
+.focused-case .case-section{padding:56px 0;border-bottom:1px solid var(--line)}
+.case-section-intro{max-width:740px;margin-bottom:28px}
+.case-section-intro h2,.focused-case .case-story-grid h2,.case-outcome h2{font-size:clamp(28px,3.2vw,42px);line-height:1.16;letter-spacing:-.04em;margin:10px 0 18px}
+.case-section-intro>p:last-child,.case-story-grid p,.case-technical-copy p,.case-outcome>p:last-child{font-size:19px;line-height:1.6;color:var(--muted)}
+.case-product .work-screen{border:1px solid var(--line);border-radius:6px;overflow:hidden;display:block;background:#14212a}
+.case-product .work-phase-description{font-size:17px;max-width:790px;line-height:1.5}
+.case-output-section{margin-top:56px}
+.sample-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.sample-tabs button{font:inherit;font-weight:650;border:0;background:transparent;cursor:pointer;padding:13px 18px;border-bottom:3px solid transparent;color:var(--muted)}
+.sample-tabs button[aria-selected=true]{color:var(--blue);border-color:var(--blue)}
+.sample-layout{display:grid;grid-template-columns:minmax(240px,.65fr) minmax(0,1fr);gap:48px;align-items:start}
+.sample-context{padding-top:24px;max-width:370px}
+.sample-context h3{font-size:28px;line-height:1.2;letter-spacing:-.035em;margin:12px 0 18px}
+.sample-context>p{font-size:18px;line-height:1.5;color:var(--muted)}
+.sample-context blockquote{margin:24px 0;padding:16px 0 16px 20px;border-left:2px solid var(--blue);font-size:18px;line-height:1.5}
+.sample-context .sample-note{margin-top:24px;font-size:13px}
+.sample-document{width:100%;height:720px;display:block;border:1px solid var(--line);background:white;border-radius:5px}
+.case-story-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px}
+.case-ownership h3{font-size:25px;letter-spacing:-.03em;margin:10px 0 18px}
+.case-change{margin-top:24px;border-top:1px solid var(--line);padding-top:20px}
+.case-change span{font-weight:700;font-size:14px;color:var(--ink)}
+.case-change p{font-size:17px;margin:6px 0 18px}
+.case-decisions{display:grid;grid-template-columns:1fr 1fr;gap:36px 60px}
+.case-decisions article{display:grid;grid-template-columns:32px 1fr;gap:14px}
+.decision-number{font-size:13px;color:var(--blue);padding-top:4px;font-weight:700}
+.case-decisions h3{font-size:23px;letter-spacing:-.025em;margin-bottom:12px}
+.case-decisions p{font-size:18px;line-height:1.6;color:var(--muted)}
+.case-system{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);padding:0;border-top:1px solid var(--ink)}
+.case-system li{padding:22px 18px 18px 0;min-width:0}
+.case-system li>span{font-size:13px;color:var(--blue);font-weight:700}
+.case-system h3{font-size:18px;line-height:1.3;margin:12px 0}
+.case-system p{font-size:16px;line-height:1.5;color:var(--muted)}
+.case-technical-copy{max-width:750px;margin:32px 0}
+.case-technical-copy h3,.case-checks h3{font-size:23px;margin-bottom:12px}
+.case-checks{margin-top:36px;max-width:810px}
+.case-checks details{border-top:1px solid var(--line);padding:18px 0}
+.case-checks summary{font-size:18px;cursor:pointer;font-weight:650}
+.case-checks details p{font-size:18px;line-height:1.6;color:var(--muted);margin:14px 0}
+.case-outcome>p{max-width:810px}
+.demo-launch{color:var(--blue)}
+@media(max-width:900px){.sample-layout{grid-template-columns:.65fr 1fr;gap:26px}.case-story-grid{gap:36px}.case-system{grid-template-columns:repeat(3,1fr)}.case-decisions{gap:28px}.case-intro-bottom{align-items:flex-start;flex-direction:column}}
+@media(max-width:650px){.focused-case .case-hero{padding:30px 0}.focused-case .case-summary{font-size:19px}.focused-case .case-section{padding:38px 0}.focused-case .case-jump-bar>div{gap:24px}.case-story-grid,.case-decisions,.sample-layout{grid-template-columns:1fr;gap:24px}.sample-context{max-width:100%;padding-top:0}.sample-document{height:580px}.sample-context blockquote{font-size:17px;margin:18px 0}.sample-context .sample-note{margin-top:15px}.case-system{grid-template-columns:1fr 1fr}.sample-tabs button{padding:12px 14px}.case-decisions p,.case-story-grid p{font-size:18px}}

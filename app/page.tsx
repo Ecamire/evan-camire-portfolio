@@ -20,6 +20,7 @@ import {
   workGalleries,
 } from "@/lib/content";
 import { WorkGallery } from "@/components/work-gallery";
+import { trekDemoUrl } from "@/lib/content";
 import { DelayedAccent } from "@/components/delayed-accent";
 
 const socialIcons = {
@@ -121,6 +122,7 @@ export default function Home() {
               <WorkGallery content={workGalleries[c.kind]} />
               <div className="work-feature-footer">
                 <p className="work-feature-result">{c.result}</p>
+                {c.kind === "marketing" && <a className="case-link demo-launch" href={trekDemoUrl} target="_blank" rel="noopener noreferrer">Try the interactive demo <ArrowUpRight size={16} aria-hidden="true" /></a>}
                 <Link className="case-link" href={"/work/" + c.slug} aria-label={`Read the ${c.name} case study`}>Read the case study <ArrowRight size={16} aria-hidden="true" /></Link>
               </div>
             </article>

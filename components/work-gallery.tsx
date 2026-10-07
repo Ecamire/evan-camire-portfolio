@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useId, useRef, useState, type KeyboardEvent } from "react";
 import type { WorkGalleryContent } from "@/lib/content";
 
-export function WorkGallery({ content }: { content: WorkGalleryContent }) {
+export function WorkGallery({ content, wide = false }: { content: WorkGalleryContent; wide?: boolean }) {
   const [index, setIndex] = useState(content.initialIndex);
   const id = useId();
   const tabs = useRef<HTMLDivElement>(null);
@@ -31,7 +31,7 @@ export function WorkGallery({ content }: { content: WorkGalleryContent }) {
       </div>
       <div id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-tab-${index}`}>
         <a className="work-screen" href={phase.media.src} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size ${content.title} screenshot: ${phase.label}`}>
-          <Image src={phase.media.src} alt={phase.media.alt} width={phase.media.width} height={phase.media.height} sizes="(max-width: 767px) 100vw, 50vw" />
+          <Image src={phase.media.src} alt={phase.media.alt} width={phase.media.width} height={phase.media.height} sizes={wide ? "100vw" : "(max-width: 767px) 100vw, 50vw"} />
         </a>
         <p className="work-phase-description">{phase.description}</p>
       </div>
