@@ -1047,6 +1047,9 @@ figure {
 .case-stack dd {margin:0;overflow-wrap:anywhere}
 .case-stack dd strong {font-size:16px;line-height:1.5;font-weight:650}
 .case-stack dd p {font-size:15px;line-height:1.55;color:var(--muted);margin:7px 0 0}
+.case-efficiency {margin-top:28px;padding-left:18px;border-left:2px solid var(--blue)}
+.case-efficiency h3 {font-size:20px;line-height:1.35;letter-spacing:-.025em;margin:0 0 12px}
+.case-efficiency p {font-size:16px;line-height:1.6;color:var(--muted);margin:0}
 .case-value {display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:center}
 .case-value .case-result {font-family:var(--font-heading),sans-serif;font-weight:700;color:var(--blue);font-size:clamp(24px,3vw,38px)!important;line-height:1.3!important;padding-left:32px;border-left:2px solid var(--blue)}
 @media(max-width:767px){.case-build-grid,.case-value {grid-template-columns:1fr;gap:32px}.case-build-steps h3 {font-size:20px}.case-why>p:not(.section-kicker),.case-build-steps p,.case-value p:not(.section-kicker){font-size:16px}.case-value .case-result {padding-left:20px}.concise-case .case-hero {padding-bottom:18px}}

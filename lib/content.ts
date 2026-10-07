@@ -471,6 +471,7 @@ export type CaseBrief = {
   problemTitle: string;
   why: string;
   stack: {label: string; tools: string; purpose: string}[];
+  efficiency: string;
   build: {title: string; text: string}[];
   valueTitle: string;
   value: string;
@@ -487,6 +488,7 @@ export const caseBriefs: Record<CaseStudy["kind"], CaseBrief> = {
       {label: "Rendering & storage", tools: "Puppeteer / Chromium · Sharp · Railway · Supabase", purpose: "Browser and image tools produce the finished assets, Railway stores the work logs, and Supabase keeps a copy of decision records."},
       {label: "Validation & monitoring", tools: "Zod · Vitest · Langfuse · Sentry", purpose: "These tools check data and workflow behavior, track model calls and cost, and report failures."},
     ],
+    efficiency: "I use prompt caching to reuse unchanged business instructions across repeated model calls, which reduces the cost of processing the same context again. I match the model to the task, using Haiku for routine tagging and contact lookups, Sonnet for drafting and coordinating research, and Opus for campaign strategy and interpreting client feedback.",
     build: [
       {title: "Give the agents the business context", text: "I combine trip information, audience preferences, and the company’s voice with its campaign schedule, current drafts, and saved client feedback, so Claude works from the business’s actual context rather than a generic prompt."},
       {title: "Turn generated content into usable assets", text: "Zod checks that Claude returns the fields the application needs, then TypeScript templates, OpenAI artwork, Sharp, and Puppeteer produce the finished designs. I save requests, revisions, and outputs in append-only JSONL logs so work survives a server restart."},
@@ -496,6 +498,7 @@ export const caseBriefs: Record<CaseStudy["kind"], CaseBrief> = {
     valueTitle: "From brief to reusable, approved assets.",
     value: "The owner can use a few prompts to create designed materials, revise them, and approve delivery in the same place, which reduces the time spent writing, formatting, and coordinating each asset.",
     details: [
+      {title: "How I track model cost and cache reuse", text: "I track model usage, cache reads, and cache writes so I can see when saved context is actually reused. Trek enables prompt caching for repeated calls that can share context, while one-off tasks can leave it off to avoid paying to create a cache that will not be used again."},
       {title: "How the sales agent researches contacts", text: "I use the Claude Agent SDK with an MCP server, which gives the agent a defined set of research and contact-list tools. Firecrawl reads public sources, and the code checks contact rows against the pages they cite while enforcing time and spending budgets and allowing only one research job per conversation at a time."},
       {title: "Why I built a separate backend", text: "The application stores the work, controls the layout, and decides whether delivery is allowed, while the model handles generation and reasoning. That keeps the workflow independent of a single model response, although changing providers still requires integration changes and validation rather than simply replacing an API key."},
     ],
@@ -510,6 +513,7 @@ export const caseBriefs: Record<CaseStudy["kind"], CaseBrief> = {
       {label: "Storage & deployment", tools: "Railway · JSONL · Supabase PostgREST", purpose: "Railway stores run and change logs, while Supabase stores operator memory and copies of decision data through its REST API."},
       {label: "Validation & monitoring", tools: "Zod · Vitest · Langfuse · Sentry · OpenTelemetry", purpose: "These check configuration and pricing behavior, trace model calls, track usage, and make failures visible."},
     ],
+    efficiency: "I use prompt caching to reuse the operator’s playbook and earlier conversation context, while keeping straightforward formatting on Haiku and using Opus for reasoning that can affect pricing. Within chat, I also adjust reasoning effort so routine follow-up lookups use less computation and price-related requests receive deeper reasoning.",
     build: [
       {title: "Connect and reconcile the operating data", text: "I wrote API adapters that bring Hospitable bookings and calendar rates together with PriceLabs recommendations, market data, and price limits. The code distinguishes the recommended rate from a manual override so each calculation starts from the right baseline."},
       {title: "Calculate a target for each available night", text: "My TypeScript pricing engine adjusts the recommended rate using booking pace, when guests typically book, local demand, time until check-in, and weekend rules. Starting from an independent recommendation prevents the same daily adjustment from repeatedly multiplying yesterday’s price."},
@@ -519,6 +523,7 @@ export const caseBriefs: Record<CaseStudy["kind"], CaseBrief> = {
     valueTitle: "Automatic morning pricing that the operator can explain.",
     value: "Eligible rates update before the operator starts his day, and he can review exceptions or ask why a rate changed because the system records its inputs, limits, and whether each update succeeded.",
     details: [
+      {title: "How I track model cost and cache reuse", text: "I track model usage, cache reads, and cache writes to check whether repeated requests actually reuse context. Revenue Radar’s chat keeps Opus as its model and adjusts reasoning effort within the conversation, which is a separate control from choosing a cheaper model for a simpler task elsewhere in the workflow."},
       {title: "How I test changes before live pricing", text: "Vitest tests cover differences between API data formats, pricing calculations, limits, approvals, chat confirmation, and failed updates. Dry-run mode and an explicit list of permitted properties let me evaluate changes before enabling real writes, while Langfuse, OpenTelemetry, and Sentry help trace calls and failures."},
       {title: "Where AI ends and the pricing code takes over", text: "AI helps research demand and explain decisions, but the TypeScript engine calculates rates and enforces the operator’s limits before anything reaches PriceLabs. Chat shares the same playbook and saved guidance, and uploaded files can inform its reasoning without directly changing a computed price or the property’s minimum-stay rules."},
     ],

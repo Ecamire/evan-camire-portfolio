@@ -37,6 +37,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     <section id="problem" className="case-section section-width case-build-grid">
       <div className="case-why"><p className="section-kicker">Why I built it</p><h2>{brief.problemTitle}</h2><p>{brief.why}</p><p className="case-role"><strong>My role</strong><br />Client discovery, scoping, architecture, implementation, testing, evaluation, and delivery.</p>
         <div className="case-stack"><h3>The stack</h3><dl>{brief.stack.map(group => <div key={group.label}><dt>{group.label}</dt><dd><strong>{group.tools}</strong><p>{group.purpose}</p></dd></div>)}</dl></div>
+        <section className="case-efficiency" aria-labelledby="model-efficiency"><h3 id="model-efficiency">Model selection &amp; prompt caching</h3><p>{brief.efficiency}</p></section>
       </div>
       <div id="architecture"><span id="decisions" /><p className="section-kicker">Implementation & decisions</p><ol className="case-build-steps">{brief.build.map((step, i) => <li key={step.title}><span className="decision-number">0{i + 1}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></li>)}</ol><details className="case-engineering"><summary>More engineering detail</summary>{brief.details.map(detail => <div key={detail.title}><h4>{detail.title}</h4><p>{detail.text}</p></div>)}</details></div>
     </section>
