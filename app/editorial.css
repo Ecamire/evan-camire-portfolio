@@ -1037,6 +1037,16 @@ figure {
 .case-evidence summary,.case-engineering summary {font-weight:600;cursor:pointer;font-size:16px;min-height:40px}
 .case-evidence[open] summary {margin-bottom:24px}
 .case-engineering p {font-size:16px;line-height:1.65;color:var(--muted)}
+.case-engineering h4 {font-size:17px;margin:20px 0 8px;letter-spacing:-.02em}
+.case-engineering h4+p {margin-top:0}
+.case-stack {margin-top:38px;padding-top:24px;border-top:1px solid var(--ink)}
+.case-stack h3 {font-size:24px;letter-spacing:-.035em;margin:0 0 18px}
+.case-stack dl {margin:0}
+.case-stack dl>div {padding:16px 0;border-bottom:1px solid var(--line)}
+.case-stack dt {font-size:12px;font-weight:650;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);margin-bottom:7px}
+.case-stack dd {margin:0;overflow-wrap:anywhere}
+.case-stack dd strong {font-size:16px;line-height:1.5;font-weight:650}
+.case-stack dd p {font-size:15px;line-height:1.55;color:var(--muted);margin:7px 0 0}
 .case-value {display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:center}
 .case-value .case-result {font-family:var(--font-heading),sans-serif;font-weight:700;color:var(--blue);font-size:clamp(24px,3vw,38px)!important;line-height:1.3!important;padding-left:32px;border-left:2px solid var(--blue)}
 @media(max-width:767px){.case-build-grid,.case-value {grid-template-columns:1fr;gap:32px}.case-build-steps h3 {font-size:20px}.case-why>p:not(.section-kicker),.case-build-steps p,.case-value p:not(.section-kicker){font-size:16px}.case-value .case-result {padding-left:20px}.concise-case .case-hero {padding-bottom:18px}}

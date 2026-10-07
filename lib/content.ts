@@ -439,7 +439,7 @@ export type WorkGalleryContent = {
 export const workGalleries: Record<CaseStudy["kind"], WorkGalleryContent> = {
   marketing: {
     title: "Trek Travel AI agent system",
-    summary: "Turn a trip brief into a designed newsletter, itinerary, or handout, with revisions and human approval.",
+    summary: "A TypeScript agent system that combines Claude, image generation, asset rendering, a persistent library, and approval-gated MailerLite delivery.",
     initialIndex: 1,
     phases: [
       { label: "Chat", description: "A short request becomes a newsletter draft, with missing trip details flagged for review.", media: {src: "/images/products/trek-agent-chat.jpg", alt: "Trek Travel agent conversation creating a fall trips newsletter", width: 2492, height: 1488} },
@@ -448,7 +448,7 @@ export const workGalleries: Record<CaseStudy["kind"], WorkGalleryContent> = {
   },
   pricing: {
     title: "Revenue Radar AI Agent",
-    summary: "Runs at 5 a.m. Eastern each morning to automatically update PriceLabs prices using bookings, demand signals, and configured limits.",
+    summary: "A custom TypeScript pricing engine connects Hospitable and PriceLabs, updates eligible rates at 5 a.m. Eastern, and explains decisions through AI chat.",
     initialIndex: 0,
     phases: [
       { label: "Reports", description: "Weekly and monthly reports connect pricing activity with booked nights, revenue, and average nightly rates.", media: {src: "/images/products/revenue-radar-reports.jpg", alt: "Revenue Radar weekly report showing booked nights, pricing activity, and booking history", width: 2470, height: 1482} },
@@ -468,32 +468,59 @@ export const radarDemoUrl = "https://revenue-radar-portfolio-demo.vercel.app/";
 
 export type CaseBrief = {
   introduction: string;
+  problemTitle: string;
   why: string;
+  stack: {label: string; tools: string; purpose: string}[];
   build: {title: string; text: string}[];
+  valueTitle: string;
   value: string;
-  detail: string;
+  details: {title: string; text: string}[];
 };
 export const caseBriefs: Record<CaseStudy["kind"], CaseBrief> = {
   marketing: {
-    introduction: "A marketing and sales agent that turns a short request into a finished newsletter, itinerary, or handout.",
-    why: "The owner was writing copy, finding images, formatting assets, and coordinating delivery by hand. He needed finished marketing materials, with a way to revise and approve them.",
-    build: [
-      {title: "Give the agents business context", text: "I built TypeScript agents with the company’s trip information, audience, voice, and tools."},
-      {title: "Turn requests into finished assets", text: "The backend creates copy and visuals, renders the asset, and saves the work in a shared library."},
-      {title: "Keep the owner in control", text: "Revisions preserve context. Approval rules control delivery, and saved work survives interrupted sessions."},
+    introduction: "I built a Node.js and TypeScript system that uses Claude to turn a travel operator’s requests into newsletters, itineraries, handouts, and researched sales contacts, with a shared library and owner approval before anything is sent.",
+    problemTitle: "Bring creation, revision, and delivery into one workflow.",
+    why: "The owner was writing copy, finding images, formatting materials, and coordinating delivery by hand, so I built a workflow that carries his request from the first draft through revisions and approval to a finished, reusable asset.",
+    stack: [
+      {label: "Runtime & agents", tools: "Node.js · TypeScript · Anthropic SDK · Claude Agent SDK", purpose: "The Node server runs the console, while Anthropic’s libraries connect Claude to marketing generation and sales research tools."},
+      {label: "External APIs", tools: "OpenAI Images · MailerLite REST · Firecrawl v2", purpose: "These APIs generate artwork, prepare email campaigns for review, and research public websites."},
+      {label: "Rendering & storage", tools: "Puppeteer / Chromium · Sharp · Railway · Supabase", purpose: "Browser and image tools produce the finished assets, Railway stores the work logs, and Supabase keeps a copy of decision records."},
+      {label: "Validation & monitoring", tools: "Zod · Vitest · Langfuse · Sentry", purpose: "These tools check data and workflow behavior, track model calls and cost, and report failures."},
     ],
-    value: "The owner can create marketing materials with a few prompts, review the finished asset, and get back to selling trips.",
-    detail: "I test content quality, rendering, saved-work recovery, and approval gates. Sentry and Langfuse help trace failures and model cost. The application owns the business state; changing model providers still requires adapter changes and validation.",
+    build: [
+      {title: "Give the agents the business context", text: "I combine trip information, audience preferences, and the company’s voice with its campaign schedule, current drafts, and saved client feedback, so Claude works from the business’s actual context rather than a generic prompt."},
+      {title: "Turn generated content into usable assets", text: "Zod checks that Claude returns the fields the application needs, then TypeScript templates, OpenAI artwork, Sharp, and Puppeteer produce the finished designs. I save requests, revisions, and outputs in append-only JSONL logs so work survives a server restart."},
+      {title: "Build the client’s approval rules into code", text: "Discovery established that the owner wanted to review every send, so I made recorded approval, recipient exclusions, unsubscribe checks, and sending limits requirements in the delivery code. MailerLite holds the prepared campaign for review before it can be sent."},
+      {title: "Make feedback improve the next output", text: "I save client corrections for future drafts and turn the ones code can check into regression tests, which catch the same mistake before it reaches the owner again. Vitest also tests rendering, recovery, and approval behavior, while Langfuse and Sentry help diagnose cost and failures."},
+    ],
+    valueTitle: "From brief to reusable, approved assets.",
+    value: "The owner can use a few prompts to create designed materials, revise them, and approve delivery in the same place, which reduces the time spent writing, formatting, and coordinating each asset.",
+    details: [
+      {title: "How the sales agent researches contacts", text: "I use the Claude Agent SDK with an MCP server, which gives the agent a defined set of research and contact-list tools. Firecrawl reads public sources, and the code checks contact rows against the pages they cite while enforcing time and spending budgets and allowing only one research job per conversation at a time."},
+      {title: "Why I built a separate backend", text: "The application stores the work, controls the layout, and decides whether delivery is allowed, while the model handles generation and reasoning. That keeps the workflow independent of a single model response, although changing providers still requires integration changes and validation rather than simply replacing an API key."},
+    ],
   },
   pricing: {
-    introduction: "An agent that updates vacation-rental prices every morning at 5 AM Eastern, with chat to explain its decisions.",
-    why: "The operator spent two hours each morning checking bookings and manually overriding PriceLabs prices. He needed that routine handled automatically, within his pricing rules.",
-    build: [
-      {title: "Connect the operating data", text: "I integrated Hospitable bookings and calendars with PriceLabs recommendations and local demand signals."},
-      {title: "Automate within pricing rules", text: "A TypeScript engine evaluates each available night. Floors, ceilings, and move limits control automatic updates; exceptions require approval."},
-      {title: "Make every change explainable", text: "The backend records prices and reasons. Chat answers questions about decisions, while reports track bookings and pricing activity."},
+    introduction: "I built a TypeScript system that uses Hospitable booking data and PriceLabs recommendations to update eligible nightly rates every morning at 5 AM Eastern, with Claude-powered chat that explains the changes and lets the operator request confirmed adjustments.",
+    problemTitle: "Automate nightly pricing within operator-defined rules.",
+    why: "The operator reported spending two hours each morning reviewing bookings and overriding PriceLabs prices, so I used his intake, property strategy, and ongoing feedback to define which decisions the system could make automatically and which needed his review.",
+    stack: [
+      {label: "Runtime & reasoning", tools: "Node.js · TypeScript · Anthropic SDK", purpose: "Node runs the pricing engine and dashboard, while Claude uses defined tools to look up data and prepare operator changes."},
+      {label: "Operational APIs", tools: "Hospitable v2 · PriceLabs v1 · monday.com GraphQL", purpose: "These connect bookings and calendars, pricing recommendations and updates, and the operator’s briefs and approval workflows."},
+      {label: "Storage & deployment", tools: "Railway · JSONL · Supabase PostgREST", purpose: "Railway stores run and change logs, while Supabase stores operator memory and copies of decision data through its REST API."},
+      {label: "Validation & monitoring", tools: "Zod · Vitest · Langfuse · Sentry · OpenTelemetry", purpose: "These check configuration and pricing behavior, trace model calls, track usage, and make failures visible."},
     ],
-    value: "Eligible prices are updated before the operator starts his day. He reviews exceptions and asks the agent why, instead of repricing listings by hand.",
-    detail: "I test data normalization, price limits, approvals, and failed-dependency behavior before live writes. Model retries and deterministic fallbacks keep the cycle resilient. Langfuse and usage tracking make calls and costs visible. Provider changes require adapters and validation.",
+    build: [
+      {title: "Connect and reconcile the operating data", text: "I wrote API adapters that bring Hospitable bookings and calendar rates together with PriceLabs recommendations, market data, and price limits. The code distinguishes the recommended rate from a manual override so each calculation starts from the right baseline."},
+      {title: "Calculate a target for each available night", text: "My TypeScript pricing engine adjusts the recommended rate using booking pace, when guests typically book, local demand, time until check-in, and weekend rules. Starting from an independent recommendation prevents the same daily adjustment from repeatedly multiplying yesterday’s price."},
+      {title: "Enforce the operator’s pricing limits", text: "I turned the intake into minimum and maximum rates, limits on individual changes, exclusions, and approval thresholds, with Zod checking the configuration. The code rechecks current limits before writing overrides to PriceLabs, which syncs them to the property system, and blocks automatic writes when required limits are missing."},
+      {title: "Let the operator question and adjust decisions", text: "Claude’s chat tools use recorded runs, pricing reasons, and the same saved operator guidance as the morning cycle, so its answers have a concrete source. A requested price change needs a preview and confirmation in a later message before the code can apply it."},
+    ],
+    valueTitle: "Automatic morning pricing that the operator can explain.",
+    value: "Eligible rates update before the operator starts his day, and he can review exceptions or ask why a rate changed because the system records its inputs, limits, and whether each update succeeded.",
+    details: [
+      {title: "How I test changes before live pricing", text: "Vitest tests cover differences between API data formats, pricing calculations, limits, approvals, chat confirmation, and failed updates. Dry-run mode and an explicit list of permitted properties let me evaluate changes before enabling real writes, while Langfuse, OpenTelemetry, and Sentry help trace calls and failures."},
+      {title: "Where AI ends and the pricing code takes over", text: "AI helps research demand and explain decisions, but the TypeScript engine calculates rates and enforces the operator’s limits before anything reaches PriceLabs. Chat shares the same playbook and saved guidance, and uploaded files can inform its reasoning without directly changing a computed price or the property’s minimum-stay rules."},
+    ],
   },
 };

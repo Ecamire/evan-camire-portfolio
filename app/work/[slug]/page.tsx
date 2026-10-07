@@ -35,10 +35,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <span id="implementation" />
     </section>
     <section id="problem" className="case-section section-width case-build-grid">
-      <div className="case-why"><p className="section-kicker">Why I built it</p><h2>{marketing ? "Less time making materials. More time selling trips." : "Give the operator his morning back."}</h2><p>{brief.why}</p><p className="case-role"><strong>My role</strong><br />Client discovery, scoping, architecture, implementation, testing, evaluation, and delivery.</p></div>
-      <div id="architecture"><span id="decisions" /><p className="section-kicker">How I built it</p><ol className="case-build-steps">{brief.build.map((step, i) => <li key={step.title}><span className="decision-number">0{i + 1}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></li>)}</ol><details className="case-engineering"><summary>Testing and technical decisions</summary><p>{brief.detail}</p><div className="technology-tags" aria-label="Technologies">{c.technologies.map(t => <span key={t}>{t}</span>)}</div></details></div>
+      <div className="case-why"><p className="section-kicker">Why I built it</p><h2>{brief.problemTitle}</h2><p>{brief.why}</p><p className="case-role"><strong>My role</strong><br />Client discovery, scoping, architecture, implementation, testing, evaluation, and delivery.</p>
+        <div className="case-stack"><h3>The stack</h3><dl>{brief.stack.map(group => <div key={group.label}><dt>{group.label}</dt><dd><strong>{group.tools}</strong><p>{group.purpose}</p></dd></div>)}</dl></div>
+      </div>
+      <div id="architecture"><span id="decisions" /><p className="section-kicker">Implementation & decisions</p><ol className="case-build-steps">{brief.build.map((step, i) => <li key={step.title}><span className="decision-number">0{i + 1}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></li>)}</ol><details className="case-engineering"><summary>More engineering detail</summary>{brief.details.map(detail => <div key={detail.title}><h4>{detail.title}</h4><p>{detail.text}</p></div>)}</details></div>
     </section>
-    <section id="result" className="case-section section-width case-value"><div><p className="section-kicker">The value</p><h2>{marketing ? "A few prompts to a finished asset." : "Morning pricing, handled."}</h2><p>{brief.value}</p></div><p className="case-result">{c.result}</p></section>
+    <section id="result" className="case-section section-width case-value"><div><p className="section-kicker">The value</p><h2>{brief.valueTitle}</h2><p>{brief.value}</p></div><p className="case-result">{c.result}</p></section>
     <aside className="next-case section-width" aria-label="Next case study"><div><p className="section-kicker">More selected work</p><Link href={`/work/${other.slug}`}><h2>{other.name} <ArrowUpRight size={24} aria-hidden="true" /></h2></Link></div><Link className="button quiet" href="/#work">Back to selected work <ArrowRight size={16} aria-hidden="true" /></Link></aside>
   </main>;
 }
